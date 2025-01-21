@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="SALES" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="EMPLOYEE" EntityType="SALES.EMPLOYEE"/>
+                <EntitySet Name="PLANTS" EntityType="SALES.PLANTS"/>
+                <EntitySet Name="EmployeeExperience" EntityType="SALES.EmployeeExperience"/>
+                <EntitySet Name="Customers" EntityType="SALES.Customers"/>
+                <EntitySet Name="CustomerPurchases" EntityType="SALES.CustomerPurchases"/>
+                <EntitySet Name="MaterialManagement" EntityType="SALES.MaterialManagement"/>
+                <EntitySet Name="DEALERS" EntityType="SALES.DEALERS"/>
+                <EntitySet Name="QUAN_INFO" EntityType="SALES.QUAN_INFO"/>
+                <EntitySet Name="Sales" EntityType="SALES.Sales"/>
+                <EntitySet Name="secret_santa" EntityType="SALES.secret_santa"/>
+                <FunctionImport Name="SendEmail" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="ID" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="GetGiver" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="ID" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="TriggerKeys" ReturnType="Edm.String" m:HttpMethod="GET"/>
+            </EntityContainer>
+            <EntityType Name="EMPLOYEE">
+                <Key>
+                    <PropertyRef Name="EMP_ID"/>
+                </Key>
+                <Property Name="EMP_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="EMP_NAME" Type="Edm.String" MaxLength="40"/>
+                <Property Name="EMP_BLODD_GRP" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EMP_DESIG" Type="Edm.String" MaxLength="20"/>
+                <Property Name="EMP_EMAIL" Type="Edm.String" MaxLength="20"/>
+                <Property Name="EMP_CONT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EMP_ADDRESS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EMP_BRANCH" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="PLANTS">
+                <Key>
+                    <PropertyRef Name="PLANT_ID"/>
+                </Key>
+                <Property Name="PLANT_ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="PLANT_NAME" Type="Edm.String"/>
+                <Property Name="PLANT_LOC" Type="Edm.String"/>
+                <Property Name="PLANT_AVATAR" Type="Edm.String"/>
+                <Property Name="PLANT_CONT" Type="Edm.String"/>
+                <Property Name="PLANT_EMAIL" Type="Edm.String"/>
+                <Property Name="PLANT_HEAD" Type="Edm.String"/>
+                <Property Name="PLANT_REVENUE" Type="Edm.String"/>
+                <Property Name="PLANT_CUST_COUNT" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="EmployeeExperience">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="EmployeeID_EMP_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CompanyName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Role" Type="Edm.String" MaxLength="50"/>
+                <Property Name="StartDate" Type="Edm.String"/>
+                <Property Name="EndDate" Type="Edm.String"/>
+                <Property Name="Responsibilities" Type="Edm.String" MaxLength="1000"/>
+            </EntityType>
+            <EntityType Name="Customers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="Email" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CONTACT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PurchasedTillNow" Type="Edm.Decimal" Scale="2" Precision="15"/>
+                <Property Name="Branch" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="CustomerPurchases">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CustomerID_ID" Type="Edm.Guid"/>
+                <Property Name="ItemName" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ItemCost" Type="Edm.Decimal" Scale="2" Precision="15"/>
+                <Property Name="PurchaseDate" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="MaterialManagement">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PRODUCT_NAME" Type="Edm.String" MaxLength="40"/>
+                <Property Name="PRODUCT_DESC" Type="Edm.String" MaxLength="40"/>
+                <Property Name="CUR_DEALER" Type="Edm.String" MaxLength="20"/>
+                <Property Name="AVATAR" Type="Edm.String"/>
+                <Property Name="QUAN_AVAIL" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="DEALERS">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="32" Nullable="false"/>
+                <Property Name="DEAL_MAT_ID" Type="Edm.Guid"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="32"/>
+                <Property Name="LOCATIION" Type="Edm.String" MaxLength="30"/>
+                <Property Name="PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SEL_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MARGIN" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CONTACT" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="QUAN_INFO">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="32" Nullable="false"/>
+                <Property Name="MAT_QUAN_ID" Type="Edm.Guid"/>
+                <Property Name="BRANCH" Type="Edm.String" MaxLength="10"/>
+                <Property Name="QUAN_AVAIL" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ACT_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SEL_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MARGIN" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="Sales">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="PLANT_NAME" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ItemName" Type="Edm.String" MaxLength="20"/>
+                <Property Name="QUAN" Type="Edm.String" MaxLength="20"/>
+                <Property Name="REVENUE" Type="Edm.String"/>
+                <Property Name="LEVEL" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EXPECTED" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DURATION" Type="Edm.String" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="secret_santa">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PASSKEY" Type="Edm.String" MaxLength="50"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="GIVER" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <Annotations Target="SALES.EntityContainer/secret_santa" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

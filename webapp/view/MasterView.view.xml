@@ -1,0 +1,9 @@
+<mvc:View xmlns:f="sap.f" controllerName="flexiblecolumnlayout.controller.MasterView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <f:FlexibleColumnLayout id="fcl">
+		<f:beginColumnPages>
+			<mvc:XMLView id="beginView" async="true" viewName="flexiblecolumnlayout.view.View1"/>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</mvc:View>

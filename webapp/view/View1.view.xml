@@ -1,0 +1,17 @@
+<mvc:View xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="flexiblecolumnlayout.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page1" title="First Page">
+        <Button text="Navigation to Middle Page" press="NavToMid" />
+        <!-- <Table id="plantTable" items="{/PLANTS}" itemPress="NavToMid">
+            <columns>
+                <Column ><Text text="Plant"></Text></Column>
+                <Column hAlign="End"> <Text text="Revenue"></Text></Column>
+            </columns>
+            <ColumnListItem type="Active">
+                <ObjectIdentifier title="{PLANT_LOC}" text="{PLANT_ID}"></ObjectIdentifier>
+                <Text text="{PLANT_REVENUE}"></Text>
+            </ColumnListItem>
+        </Table> -->
+    </Page>
+</mvc:View>
