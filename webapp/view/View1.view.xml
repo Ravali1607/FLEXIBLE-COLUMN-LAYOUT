@@ -2,6 +2,19 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page1" title="First Page">
-        <Button text="Navigate to Middle Page" press="NavToMid" />
+        <Table id="empData" items="{/EMPLOYEE}" itemPress="NavToMid">
+            <columns>
+                <Column ><Label text="ID"/></Column>
+                <Column ><Label text="NAME"/></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" >
+                    <cells>
+                        <Text text="{EMP_ID}"></Text>
+                        <Text text="{EMP_NAME}"></Text>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
     </Page>
 </mvc:View>

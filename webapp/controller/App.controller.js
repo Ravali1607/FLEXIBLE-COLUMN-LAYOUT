@@ -10,7 +10,7 @@ sap.ui.define([
         this.oEventBus = this.getOwnerComponent().getEventBus();
         this.oEventBus.subscribe("flexible","setView1",this.setView1,this);
         this.oEventBus.subscribe("flexible","setView2",this.setView2,this);
-        // this.oEventBus.subscribe("flexible","setView3",this.setView3,this);
+        this.oEventBus.subscribe("flexible","setView3",this.setView3,this);
         this.oFlexible = this.byId("fcl");
     },
     setView1: function(){

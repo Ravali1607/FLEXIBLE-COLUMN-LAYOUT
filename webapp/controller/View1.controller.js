@@ -2,14 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller"
 ], (Controller) => {
     "use strict";
-
+    var that;
     return Controller.extend("flexiblecolumnlayout.controller.View1", {
         onInit() {
-            this.oEventBus = this.getOwnerComponent().getEventBus();
+            that=this;
+            that.oEventBus = that.getOwnerComponent().getEventBus();
         },
-        NavToMid: function(){
+        NavToMid: function(oEvent){
             sap.m.MessageToast.show("Successful");
-            this.oEventBus.publish("flexible","setView2");
+            var oTable = that.byId("empData");
+            
+            that.oEventBus.publish("flexible","setView2");
         }
     });
 });
