@@ -90,13 +90,6 @@
             },
             "routes": [
                 {
-                    "name": "RouteMasterView",
-                    "pattern": "",
-                    "target": [
-                        "TargetMasterView"
-                    ]
-                },
-                {
                     "name": "View1",
                     "pattern": "View1",
                     "target": [
@@ -119,10 +112,6 @@
                 }
             ],
             "targets": {
-                "TargetMasterView": {
-                    "id": "MasterView",
-                    "name": "MasterView"
-                },
                 "TargetMasterView1": {
                     "id": "MasterView1",
                     "name": "MasterView1"
