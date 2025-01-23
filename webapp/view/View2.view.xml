@@ -1,12 +1,59 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View2" height="100%">
+<mvc:View xmlns:table="sap.ui.table" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View2" height="100%"
+xmlns:form="sap.ui.layout.form"
+xmlns:layout="sap.ui.layout">
 	<Page id="page2" title="Middle Page">
     <headerContent>
         <Button icon="sap-icon://decline" press="onClose"></Button>
     </headerContent>
 		<VBox>
-			<Button text="Navigate To First Page" press="NavToFirst"/>
+			<!-- <Button text="Navigate To First Page" press="NavToFirst"/> -->
 			<Button text="Navigate To End Page" press="NavToEnd" />
 		</VBox>
-		<ObjectHeader ></ObjectHeader>
+		<!-- <Table items="{path : '/items'}" id="empForm">
+			<columns>
+				<Column ><Label text="ID"/></Column>
+				<Column ><Label text="NAME"/></Column>
+				<Column ><Label text="BLOOD GROUP"/></Column>
+				<Column ><Label text="DESIGNATION"/></Column>
+				<Column ><Label text="EMAIL"/></Column>
+				<Column ><Label text="CONTACT"/></Column>
+				<Column ><Label text="ADDRESS"/></Column>
+				<Column ><Label text="BRANCH"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem >
+					<cells>
+						<Text text="{EMP_ID}"></Text>
+						<Text text="{EMP_NAME}"></Text>
+						<Text text="{EMP_BLODD_GRP}"></Text>
+						<Text text="{EMP_DESIG}"></Text>
+						<Text text="{EMP_EMAIL}"></Text>
+						<Text text="{EMP_CONT}"></Text>
+						<Text text="{EMP_ADDRESS}"></Text>
+						<Text text="{EMP_BRANCH}"></Text>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table> -->
+		<form:SimpleForm id="empForm">
+			<form:content>
+				<Label text="Id"></Label>
+				<Input value="{items>EMP_ID}" />
+				<Label text="Name"></Label>
+				<Input value="{items>EMP_NAME}"/>
+				<Label text="Bood Group"></Label>
+				<Input value="{items>EMP_BLODD_GRP}"/>
+				<Label text="Designation"></Label>
+				<Input value="{items>EMP_DESIG}"/>
+				<Label text="Email"></Label>
+				<Input value="{items>EMP_EMAIL}"/>
+				<Label text="Contact"></Label>
+				<Input value="{items>EMP_CONT}"/>
+				<Label text="Address"></Label>
+				<Input value="{items>EMP_ADDRESS}"/>
+				<Label text="Branch"></Label>
+				<Input value="{items>EMP_BRANCH}"/>
+			</form:content>
+		</form:SimpleForm>
 	</Page>
 </mvc:View>

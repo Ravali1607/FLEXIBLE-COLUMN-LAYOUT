@@ -11,8 +11,8 @@ sap.ui.define([
         NavToMid: function(oEvent){
             sap.m.MessageToast.show("Successful");
             var oTable = that.byId("empData");
-            
-            that.oEventBus.publish("flexible","setView2");
+            var oItem = oEvent.getSource().getBindingContext().getProperty();
+            that.oEventBus.publish("flexible","setView2",oItem);
         }
     });
 });
