@@ -5,6 +5,10 @@ sap.ui.define([
     return Controller.extend("flexiblecolumnlayout.controller.View3", {
         onInit() {
             this.oEventBus = this.getOwnerComponent().getEventBus();
+            this.oEventBus.subscribe("flexible","setView3",this.oPlant,this)
+        },
+        oPlant: function(sChannel,sEvent,oData){
+            var oDetail = oData.EMP_ID;
         },
         NavToSecond: function(){
             sap.m.MessageToast.show("Button Clicked");

@@ -16,7 +16,7 @@ sap.ui.define([
     setView1: function(){
       this.oFlexible.setLayout(fioriLibrary.LayoutType.OneColumn);
     },
-    setView2: function () {
+    setView2: function (){
       this._loadView({
         id: "midView",
         viewName: "flexiblecolumnlayout.view.View2",

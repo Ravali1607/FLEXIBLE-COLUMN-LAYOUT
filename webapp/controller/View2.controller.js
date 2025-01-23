@@ -30,9 +30,10 @@ sap.ui.define([
             sap.m.MessageToast.show("Button Clicked");
             that.oEventBus.publish("flexible","setView1");
         },
-        NavToEnd: function(){
+        NavToEnd: function(oEvent){
             sap.m.MessageToast.show("End Page Button Clicked");
-            that.oEventBus.publish("flexible","setView3");
+            var oPlant = oEvent.getSource().getBindingContext().getProperty()
+            that.oEventBus.publish("flexible","setView3",oPlant);
         },
         onClose: function(){
             that.oEventBus.publish("flexible","setView1");

@@ -6,5 +6,29 @@
 		<VBox>
 			<Button text="Navigate To Middle Page" press="NavToSecond"/>
 		</VBox>
+		<Table id="plantData" items="{/PLANTS}">
+			<columns>
+				<Column ><Label text="Plant ID"></Label></Column>
+				<Column ><Label text="Name"></Label></Column>
+				<Column ><Label text="Location"></Label></Column>
+				<Column ><Label text="Contact"></Label></Column>
+				<Column ><Label text="Email"></Label></Column>
+				<Column ><Label text="Head of the Plant"></Label></Column>
+				<Column ><Label text="Revenue"></Label></Column>
+				<Column ><Label text="Customer Count"></Label></Column>
+			</columns>
+			<items>
+				<ColumnListItem >
+					<Text text="{PLANT_ID}"></Text>
+					<Text text="{PLANT_NAME}"></Text>
+					<Text text="{PLANT_LOC}"></Text>
+					<Text text="{PLANT_CONT}"></Text>
+					<Text text="{PLANT_EMAIL}"></Text>
+					<Text text="{PLANT_HEAD}"></Text>
+					<Text text="{PLANT_REVENUE}"></Text>
+					<Text text="{PLANT_CUST_COUNT}"></Text>
+				</ColumnListItem>
+			</items>
+		</Table>
 	</Page>
 </mvc:View>

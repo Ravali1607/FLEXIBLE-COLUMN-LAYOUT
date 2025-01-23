@@ -3,13 +3,14 @@ xmlns:form="sap.ui.layout.form"
 xmlns:layout="sap.ui.layout">
 	<Page id="page2" title="Middle Page">
     <headerContent>
+		<Button icon="sap-icon://full-screen" press="fullScreen"></Button>
         <Button icon="sap-icon://decline" press="onClose"></Button>
     </headerContent>
 		<VBox>
 			<!-- <Button text="Navigate To First Page" press="NavToFirst"/> -->
 			<Button text="Navigate To End Page" press="NavToEnd" />
 		</VBox>
-		<!-- <Table items="{path : '/items'}" id="empForm">
+		<Table items="{path : '/items'}" id="empForm" headerText="{EMPLOYEE>EMP_NAME}">
 			<columns>
 				<Column ><Label text="ID"/></Column>
 				<Column ><Label text="NAME"/></Column>
@@ -34,8 +35,8 @@ xmlns:layout="sap.ui.layout">
 					</cells>
 				</ColumnListItem>
 			</items>
-		</Table> -->
-		<form:SimpleForm id="empForm">
+		</Table>
+		<!-- <form:SimpleForm id="empForm">
 			<form:content>
 				<Label text="Id"></Label>
 				<Input value="{items>EMP_ID}" />
@@ -54,6 +55,6 @@ xmlns:layout="sap.ui.layout">
 				<Label text="Branch"></Label>
 				<Input value="{items>EMP_BRANCH}"/>
 			</form:content>
-		</form:SimpleForm>
+		</form:SimpleForm> -->
 	</Page>
 </mvc:View>
