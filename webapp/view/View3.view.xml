@@ -1,12 +1,12 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View3" height="100%">
-	<Page id="page3" title="End Page">
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View3" height="100%">
+	<Page id="page3" title="Plant Information">
         <headerContent>
             <Button icon="sap-icon://decline" press="onClose"></Button>
         </headerContent>
-		<VBox>
+		<!-- <VBox>
 			<Button text="Navigate To Middle Page" press="NavToSecond"/>
-		</VBox>
-		<Table id="plantData" items="{/PLANTS}">
+		</VBox> -->
+		<!-- <Table id="plantData" items="{/plant}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
 				<Column ><Label text="Name"></Label></Column>
@@ -29,6 +29,26 @@
 					<Text text="{PLANT_CUST_COUNT}"></Text>
 				</ColumnListItem>
 			</items>
-		</Table>
+		</Table> -->
+		<form:SimpleForm id="plantData">
+			<form:content>
+				<Label text="ID" />
+				<Text text="{plant>PLANT_ID}"></Text>
+				<Label text="NAME" />
+				<Text text="{plant>PLANT_NAME}"></Text>
+				<Label text="LOCATION" />
+				<Text text="{plant>PLANT_LOC}"></Text>
+				<Label text="CONTACT" />
+				<Text text="{plant>PLANT_CONT}"></Text>
+				<Label text="EMAIL" />
+				<Text text="{plant>PLANT_EMAIL}"></Text>
+				<Label text="HEAD OF THE PLANT" />
+				<Text text="{plant>PLANT_HEAD}"></Text>
+				<Label text="REVENUE" />
+				<Text text="{plant>PLANT_REVENUE}"></Text>
+				<Label text="CUSTOMER COUNT" />
+				<Text text="{plant>PLANT_CUST_COUNT}"></Text>
+			</form:content>
+		</form:SimpleForm>
 	</Page>
 </mvc:View>

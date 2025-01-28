@@ -1,16 +1,16 @@
 <mvc:View xmlns:table="sap.ui.table" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View2" height="100%"
 xmlns:form="sap.ui.layout.form"
 xmlns:layout="sap.ui.layout">
-	<Page id="page2" title="Middle Page">
+	<Page id="page2" title="Details of an Employee">
     <headerContent>
-		<Button icon="sap-icon://full-screen" press="fullScreen"></Button>
+		<!-- <Button icon="sap-icon://full-screen" press="fullScreen"></Button> -->
         <Button icon="sap-icon://decline" press="onClose"></Button>
     </headerContent>
 		<VBox>
 			<!-- <Button text="Navigate To First Page" press="NavToFirst"/> -->
-			<Button text="Navigate To End Page" press="NavToEnd" />
+			<!-- <Button text="Navigate To End Page" press="NavToEnd" /> -->
 		</VBox>
-		<Table items="{path : '/items'}" id="empForm" headerText="{EMPLOYEE>EMP_NAME}">
+		<Table items="{/items}" id="empForm">
 			<columns>
 				<Column ><Label text="ID"/></Column>
 				<Column ><Label text="NAME"/></Column>
@@ -19,10 +19,10 @@ xmlns:layout="sap.ui.layout">
 				<Column ><Label text="EMAIL"/></Column>
 				<Column ><Label text="CONTACT"/></Column>
 				<Column ><Label text="ADDRESS"/></Column>
-				<Column ><Label text="BRANCH"/></Column>
+				<Column ><Label text="BRANCH COUNT"/></Column>
 			</columns>
 			<items>
-				<ColumnListItem >
+				<ColumnListItem type="Navigation" press="NavToEnd">
 					<cells>
 						<Text text="{EMP_ID}"></Text>
 						<Text text="{EMP_NAME}"></Text>

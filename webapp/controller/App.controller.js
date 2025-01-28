@@ -31,7 +31,7 @@ sap.ui.define([
           viewName: "flexiblecolumnlayout.view.View3"
       }).then(function(View3){
           this.oFlexible.addEndColumnPage(View3);
-          this.oFlexible.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
+          this.oFlexible.setLayout(fioriLibrary.LayoutType.ThreeColumnsEndExpanded);
       }.bind(this));
     },
     _loadView: function(options) {
@@ -40,8 +40,8 @@ sap.ui.define([
         mViews[options.id] = this.getOwnerComponent().runAsOwner(function() {
           return XMLView.create(options);
         });
+      }
+      return mViews[options.id];
     }
-    return mViews[options.id];
-  }
-});
+  });
 });

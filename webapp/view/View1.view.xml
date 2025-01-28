@@ -1,7 +1,8 @@
 <mvc:View xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="flexiblecolumnlayout.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page1" title="First Page">
+    <Page id="page1" title="EMPLOYEE">
+    <!-- <Button text="Nav to Mid" press="NavToMid"></Button> -->
         <Table id="empData" items="{/EMPLOYEE}">
             <columns>
                 <Column ><Label text="ID"/></Column>

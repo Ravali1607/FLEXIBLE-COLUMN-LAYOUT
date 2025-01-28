@@ -2,17 +2,26 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller"
 ], (Controller) => {
     "use strict";
+    var that;
     return Controller.extend("flexiblecolumnlayout.controller.View3", {
         onInit() {
+            that=this;
             this.oEventBus = this.getOwnerComponent().getEventBus();
-            this.oEventBus.subscribe("flexible","setView3",this.oPlant,this)
+            this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
         },
-        oPlant: function(sChannel,sEvent,oData){
-            var oDetail = oData.EMP_ID;
-        },
-        NavToSecond: function(){
-            sap.m.MessageToast.show("Button Clicked");
-            this.oEventBus.publish("flexible","setView2");
+        oBranch: function(sChannel,sEvent,oData){
+            var Branch = oData.plant.EMP_BRANCH;
+            this.getOwnerComponent().getModel().read("/PLANTS",{
+                success: function(response){
+                    var filteredBranchData = response.results.filter(branch => branch.PLANT_LOC === Branch);
+                    console.log(filteredBranchData);
+                    var oModel = new sap.ui.model.json.JSONModel({
+                        plant : filteredBranchData
+                    })
+                    that.byId("plantData").setModel(oModel);
+                    // that.getView().setModel(oModel);
+                }
+            })
         },
         onClose: function(){
             this.oEventBus.publish("flexible","setView2");
