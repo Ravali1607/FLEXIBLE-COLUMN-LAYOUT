@@ -10,7 +10,7 @@ sap.ui.define([
             this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
         },
         oBranch: function(sChannel,sEvent,oData){
-            var Branch = oData.plant.EMP_BRANCH;
+            var Branch = oData.branch.EMP_BRANCH;
             this.getOwnerComponent().getModel().read("/PLANTS",{
                 success: function(response){
                     var filteredBranchData = response.results.filter(branch => branch.PLANT_LOC === Branch);
@@ -19,7 +19,10 @@ sap.ui.define([
                         plant : filteredBranchData
                     })
                     that.byId("plantData").setModel(oModel);
-                    // that.getView().setModel(oModel);
+                    // that.getView().byId("plantData").setModel(oModel);
+                },error: function(error){
+                    sap.m.MessageToast.show("Error");
+                    console.log(error);
                 }
             })
         },

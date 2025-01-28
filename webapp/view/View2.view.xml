@@ -6,10 +6,10 @@ xmlns:layout="sap.ui.layout">
 		<!-- <Button icon="sap-icon://full-screen" press="fullScreen"></Button> -->
         <Button icon="sap-icon://decline" press="onClose"></Button>
     </headerContent>
-		<VBox>
+		<!-- <VBox> -->
 			<!-- <Button text="Navigate To First Page" press="NavToFirst"/> -->
 			<!-- <Button text="Navigate To End Page" press="NavToEnd" /> -->
-		</VBox>
+		<!-- </VBox> -->
 		<Table items="{/items}" id="empForm">
 			<columns>
 				<Column ><Label text="ID"/></Column>

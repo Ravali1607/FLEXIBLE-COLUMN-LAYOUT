@@ -35,7 +35,7 @@ sap.ui.define([
             sap.m.MessageToast.show("End Page Button Clicked");
             var oTable = that.byId("empForm");
             var oPlant = oEvent.getSource().getBindingContext().getProperty();
-            this.oEventBus.publish("flexible","setView3",{plant : oPlant});
+            this.oEventBus.publish("flexible","setView3",{branch: oPlant});
         },
         onClose: function(){
             this.oEventBus.publish("flexible","setView1");
