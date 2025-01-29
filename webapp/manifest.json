@@ -109,6 +109,13 @@
                     "target": [
                         "TargetMasterView3"
                     ]
+                },
+                {
+                    "name": "View4",
+                    "pattern": "View4",
+                    "target": [
+                        "TargetMasterView4"
+                    ]
                 }
             ],
             "targets": {
@@ -123,6 +130,10 @@
                 "TargetMasterView3": {
                     "id": "MasterView3",
                     "name": "MasterView3"
+                },
+                "TargetMasterView4": {
+                    "id": "MasterView4",
+                    "name": "MasterView4"
                 }
             }
         },

@@ -30,6 +30,11 @@ sap.ui.define([
         },
         onClose: function(){
             this.oEventBus.publish("flexible","setView2");
+        },
+        forNextPage: function(){
+            var oNextUIState = that.getOwnerComponent().getHelper().getNextUIState(3);
+            var oRouter = that.getOwnerComponent().getRouter();
+            oRouter.navTo("View4", {layout: oNextUIState.layout});
         }
     });
 });

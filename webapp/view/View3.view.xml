@@ -53,5 +53,6 @@
 			>
 			</StandardListItem>
 		</List>
+		<Button text="Navigation to Next Page" press="forNextPage"></Button>
 	</Page>
 </mvc:View>
