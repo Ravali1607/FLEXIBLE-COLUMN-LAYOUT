@@ -7,12 +7,6 @@
 		<f:beginColumnPages>
 			<mvc:XMLView id="beginView" async="true" viewName="flexiblecolumnlayout.view.View1"/>
 		</f:beginColumnPages>
-        <!-- <f:midColumnPages>
-            <mvc:XMLView id="midView" async="true" viewName="flexiblecolumnlayout.view.View2" />
-        </f:midColumnPages>
-        <f:endColumnPages>
-            <mvc:XMLView id="endView" async="true" viewName="flexiblecolumnlayout.view.View3"/>
-        </f:endColumnPages> -->
 	</f:FlexibleColumnLayout>
     </App>
 </mvc:View>
