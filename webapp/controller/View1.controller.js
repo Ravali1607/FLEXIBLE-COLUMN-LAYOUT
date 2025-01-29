@@ -9,7 +9,6 @@ sap.ui.define([
             that.oEventBus = that.getOwnerComponent().getEventBus();
         },
         NavToMid: function(oEvent){
-            sap.m.MessageToast.show("Successful");
             var oTable = that.byId("empData");
             var oItem = oEvent.getSource().getBindingContext().getProperty();
             that.oEventBus.publish("flexible","setView2",oItem);

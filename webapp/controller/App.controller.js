@@ -31,7 +31,7 @@ sap.ui.define([
           viewName: "flexiblecolumnlayout.view.View3"
       }).then(function(View3){
           this.oFlexible.addEndColumnPage(View3);
-          this.oFlexible.setLayout(fioriLibrary.LayoutType.ThreeColumnsEndExpanded);
+          this.oFlexible.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
       }.bind(this));
     },
     _loadView: function(options) {

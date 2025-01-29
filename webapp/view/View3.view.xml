@@ -3,9 +3,6 @@
         <headerContent>
             <Button icon="sap-icon://decline" press="onClose"></Button>
         </headerContent>
-		<!-- <VBox>
-			<Button text="Navigate To Middle Page" press="NavToSecond"/>
-		</VBox> -->
 		<!-- <Table id="plantData" items="{/plant}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
@@ -53,7 +50,6 @@
 		<List id="plantData" items="{/plant}">
 			<StandardListItem title="{PLANT_ID}"
 			description="{PLANT_NAME}"
-
 			>
 			</StandardListItem>
 		</List>
