@@ -15,7 +15,7 @@ sap.ui.define([
                 this.getOwnerComponent().getModel().read("/PLANTS",{
                     success: function(response){
                         var filteredBranchData = response.results.filter(branch => branch.PLANT_LOC === Branch);
-                        console.log(filteredBranchData);
+                        console.log(filteredBranchData);    
                         var oModel = new sap.ui.model.json.JSONModel({
                             plant : filteredBranchData
                         })
