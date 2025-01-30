@@ -9,6 +9,9 @@ sap.ui.define([
             this.oEventBus = this.getOwnerComponent().getEventBus();
             this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
         },
+        onAfterRendering: function(){
+            this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
+        },
         oBranch: function(sChannel,sEvent,oData){
             if(oData && oData.branch.EMP_BRANCH){
                 var Branch = oData.branch.EMP_BRANCH;
@@ -31,10 +34,12 @@ sap.ui.define([
         onClose: function(){
             this.oEventBus.publish("flexible","setView2");
         },
+        onFullScreen: function(){
+    
+        },
         forNextPage: function(){
-            var oNextUIState = that.getOwnerComponent().getHelper().getNextUIState(3);
             var oRouter = that.getOwnerComponent().getRouter();
-            oRouter.navTo("View4", {layout: oNextUIState.layout});
+            oRouter.navTo("View4");
         }
     });
 });

@@ -3,7 +3,8 @@ xmlns:form="sap.ui.layout.form"
 xmlns:layout="sap.ui.layout">
 	<Page id="page2" title="Details of an Employee">
 		<headerContent>
-			<Button icon="sap-icon://decline" press="onClose"></Button>
+		<Button icon="sap-icon://full-screen" press="onFullScreen"></Button>
+		<Button icon="sap-icon://decline" press="onClose"></Button>
 		</headerContent>
 		<Table items="{/items}" id="empForm">
 			<columns>

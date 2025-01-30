@@ -13,8 +13,19 @@ sap.ui.define([
       this.oEventBus.subscribe("flexible","setView3",this.setView3,this);
       this.oFlexible = this.byId("fcl");
     },
+    onExit(){
+      this.oEventBus.unsubscribe("flexible","setView1",this.setView1,this);
+      this.oEventBus.unsubscribe("flexible","setView2",this.setView2,this);
+      this.oEventBus.unsubscribe("flexible","setView3",this.setView3,this);
+    },
     setView1: function(){
-      this.oFlexible.setLayout(fioriLibrary.LayoutType.OneColumn);
+      this._loadView({
+        id: "beginView",
+        viewName: "flexiblecolumnlayout.view.View1",
+      }).then(function(View1) {
+        // this.oFlexible.addMidColumnPage(View1);
+        this.oFlexible.setLayout(fioriLibrary.LayoutType.OneColumn);
+      }.bind(this));
     },
     setView2: function (){
       this._loadView({
