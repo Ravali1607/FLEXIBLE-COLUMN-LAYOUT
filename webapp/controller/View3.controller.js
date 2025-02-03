@@ -1,6 +1,7 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "sap/f/library"
+], (Controller,fioriLibrary) => {
     "use strict";
     var that;
     return Controller.extend("flexiblecolumnlayout.controller.View3", {
@@ -35,11 +36,14 @@ sap.ui.define([
             this.oEventBus.publish("flexible","setView2");
         },
         onFullScreen: function(){
-    
+            var viewId = that.byId("page3");
+            var oButton = that.byId("fullScreenButton");
+            oFlexible.setLayout(fioriLibrary.LayoutType.EndColFullScreen);
         },
-        forNextPage: function(){
-            var oRouter = that.getOwnerComponent().getRouter();
-            oRouter.navTo("View4");
+        forNextPage: function() {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);  
+            oRouter.navTo("View4"); 
         }
+        
     });
 });
