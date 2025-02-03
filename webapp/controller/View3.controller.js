@@ -41,7 +41,7 @@ sap.ui.define([
             oFlexible.setLayout(fioriLibrary.LayoutType.EndColFullScreen);
         },
         forNextPage: function() {
-            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);  
+            var oRouter = that.getOwnerComponent().getRouter();  
             oRouter.navTo("View4"); 
         }
         

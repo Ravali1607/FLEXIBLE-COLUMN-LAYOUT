@@ -4,9 +4,9 @@
     xmlns="sap.m">
     <App id="app">
         <f:FlexibleColumnLayout id="fcl">
-		<f:beginColumnPages>
-			<mvc:XMLView id="beginView" async="true" viewName="flexiblecolumnlayout.view.View1"/>
-		</f:beginColumnPages>
+            <f:beginColumnPages>
+                <mvc:XMLView id="beginView" async="true" viewName="flexiblecolumnlayout.view.View1"/>
+            </f:beginColumnPages>
 	</f:FlexibleColumnLayout>
     </App>
 </mvc:View>

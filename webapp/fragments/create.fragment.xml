@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
+xmlns= "sap.m"
+>
+    <Dialog id="createDialog">
+        <form:SimpleForm >
+            <form:content>
+                <Label text="ID"/>
+                <Input id="input1" ></Input>
+                <Label text="Company Name"/>
+                <Input id="input2" ></Input>
+                <Label text="Role"/>
+                <Input id="input3" ></Input>
+                <Label text="Start Date"/>
+                <DatePicker id="input4"></DatePicker>
+                <!-- <Input id="input4" ></Input> -->
+                <Label text="End Date"/>
+                <DatePicker id="input5"></DatePicker>
+                <Label text="Resposibilities"/>
+                <TextArea id="input6" height="80px"></TextArea>
+                <!-- <Input id="input6" ></Input> -->
+            </form:content>
+        </form:SimpleForm>
+        <footer>
+            <Toolbar >
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Submit" press="onSubmit"></Button>
+            </Toolbar>
+        </footer>
+
+    </Dialog>
+</core:FragmentDefinition>

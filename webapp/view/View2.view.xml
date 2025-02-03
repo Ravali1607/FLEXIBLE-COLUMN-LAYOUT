@@ -6,7 +6,10 @@ xmlns:layout="sap.ui.layout">
 		<Button icon="sap-icon://full-screen" press="onFullScreen"></Button>
 		<Button icon="sap-icon://decline" press="onClose"></Button>
 		</headerContent>
-		<Table items="{/items}" id="empForm">
+		<Bar >
+			<contentRight><Button icon="sap-icon://create-form" press="onCreate"></Button></contentRight>
+		</Bar>
+		<!-- <Table items="{/items}" id="empForm">
 			<columns>
 				<Column ><Label text="ID"/></Column>
 				<Column ><Label text="NAME"/></Column>
@@ -31,7 +34,7 @@ xmlns:layout="sap.ui.layout">
 					</cells>
 				</ColumnListItem>
 			</items>
-		</Table>
+		</Table> -->
 		<!-- <form:SimpleForm id="empForm">
 			<form:content>
 				<Label text="Id"></Label>
@@ -52,5 +55,29 @@ xmlns:layout="sap.ui.layout">
 				<Input value="{items>EMP_BRANCH}"/>
 			</form:content>
 		</form:SimpleForm> -->
+		<Table items="{/EmployeeExperience}" id="empForm1">
+			<columns>
+				<Column ><Label text="ID"/></Column>
+				<Column ><Label text="ID"/></Column>
+				<Column ><Label text="Comapny Name"/></Column>
+				<Column ><Label text="Role"/></Column>
+				<Column ><Label text="Start Date"/></Column>
+				<Column ><Label text="End Date"/></Column>
+				<Column ><Label text="Responsibilities"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="NavToEnd">
+					<cells>
+						<Text text="{ID}"></Text>
+						<Text text="{EmployeeID_EMP_ID}"></Text>
+						<Text text="{CompanyName}"></Text>
+						<Text text="{Role}"></Text>
+						<Text text="{StartDate}" ></Text>
+						<Text text="{EndDate}"></Text>
+						<Text text="{Responsibilities}"></Text>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
 	</Page>
 </mvc:View>

@@ -1,15 +1,21 @@
-<mvc:View xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="flexiblecolumnlayout.controller.View1"
+<mvc:View xmlns:tnt="sap.tnt" xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="flexiblecolumnlayout.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page1" title="EMPLOYEE">
     <!-- <Button text="Nav to Mid" press="NavToMid"></Button> -->
+    <Toolbar >
+        <ToolbarSpacer width="900px"></ToolbarSpacer>
+        <SearchField id="search" liveChange="searchField"></SearchField>
+        <Button icon="sap-icon://add" press="onAdd"></Button>
+        <Button icon="sap-icon://sort" press="onSort"></Button>
+    </Toolbar>
         <Table id="empData" items="{/EMPLOYEE}">
             <columns>
                 <Column ><Label text="ID"/></Column>
                 <Column ><Label text="NAME"/></Column>
             </columns>
             <items>
-                <ColumnListItem type="Navigation" press="NavToMid">
+                <ColumnListItem type="Active" press="NavToMid">
                     <cells>
                         <Text text="{EMP_ID}"></Text>
                         <Text text="{EMP_NAME}"></Text>

@@ -10,24 +10,24 @@ sap.ui.define([
             this.oEventBus = this.getOwnerComponent().getEventBus();
             this.oEventBus.subscribe("flexible","setView2",this.data,this);
         },
-        data: function(schannel,sEventId,oData){
-            if(oData && oData.EMP_ID){
-                var oItem = oData.EMP_ID;
-                this.getOwnerComponent().getModel().read("/EMPLOYEE",{
-                    success:function(response){
-                        var filteredData = response.results.filter(emp => emp.EMP_ID === oItem)
-                        console.log(filteredData);
-                        var oModel = new sap.ui.model.json.JSONModel({
-                            items : filteredData
-                        })
-                        that.byId("empForm").setModel(oModel);
-                    },error:function(error){
-                        console.log(error);
-                        sap.m.MessageToast.show("error");
-                    }
-                })
-            }
-        },
+        // data: function(schannel,sEventId,oData){
+        //     if(oData && oData.EMP_ID){
+        //         var oItem = oData.EMP_ID;
+        //         this.getOwnerComponent().getModel().read("/EMPLOYEE",{
+        //             success:function(response){
+        //                 var filteredData = response.results.filter(emp => emp.EMP_ID === oItem)
+        //                 console.log(filteredData);
+        //                 var oModel = new sap.ui.model.json.JSONModel({
+        //                     items : filteredData
+        //                 })
+        //                 that.byId("empForm").setModel(oModel);
+        //             },error:function(error){
+        //                 console.log(error);
+        //                 sap.m.MessageToast.show("error");
+        //             }
+        //         })
+        //     }
+        // },
         NavToFirst: function(){
             sap.m.MessageToast.show("Button Clicked");
             this.oEventBus.publish("flexible","setView1");
@@ -40,6 +40,33 @@ sap.ui.define([
         },
         onClose: function(){
             this.oEventBus.publish("flexible","setView1");
+        },
+        onCreate: function(){
+            if(!that.createDialog){
+                that.createDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.create",that);
+            }
+            that.createDialog.open();
+        },
+        onSubmit: function(){
+            let oEmp = {
+                EmployeeID_EMP_ID :sap.ui.getCore().byId("input1").getValue(),
+                CompanyName :sap.ui.getCore().byId("input2").getValue(),
+                Role :sap.ui.getCore().byId("input3").getValue(),
+                StartDate :sap.ui.getCore().byId("input4").getValue(),
+                EndDate: sap.ui.getCore().byId("input5").getValue(),
+                Responsibilities :sap.ui.getCore().byId("input6").getValue(),
+            }
+            var oModel = that.getOwnerComponent().getModel();
+            oModel.create("/EmployeeExperience",oEmp,{
+                success:function(response){
+                    sap.m.MessageToast.show("successfull");
+                    oModel.refresh();
+                },error:function(error){
+                    sap.m.MessageToast.show("Error");
+                    console.log(error);
+                }
+            })
+            that.createDialog.close();
         }
     });
 });
