@@ -9,19 +9,27 @@
         <Button icon="sap-icon://add" press="onAdd"></Button>
         <Button icon="sap-icon://sort" press="onSort"></Button>
     </Toolbar>
-        <Table id="empData" items="{/EMPLOYEE}">
-            <columns>
-                <Column ><Label text="ID"/></Column>
-                <Column ><Label text="NAME"/></Column>
-            </columns>
-            <items>
-                <ColumnListItem type="Active" press="NavToMid">
-                    <cells>
-                        <Text text="{EMP_ID}"></Text>
-                        <Text text="{EMP_NAME}"></Text>
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <Table items="{/EmployeeExperience}" id="empExpTable">
+			<columns>
+				<Column ><Label text="ID"/></Column>
+				<Column ><Label text="Comapny Name"/></Column>
+				<Column ><Label text="Role"/></Column>
+				<Column ><Label text="Start Date"/></Column>
+				<Column ><Label text="End Date"/></Column>
+				<Column ><Label text="Responsibilities"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="NavToMid">
+					<cells>
+						<Text text="{ID}"></Text>
+						<Text text="{CompanyName}"></Text>
+						<Text text="{Role}"></Text>
+						<Text text="{StartDate}" ></Text>
+						<Text text="{EndDate}"></Text>
+						<Text text="{Responsibilities}"></Text>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
     </Page>
 </mvc:View>

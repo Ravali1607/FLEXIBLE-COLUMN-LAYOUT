@@ -35,49 +35,25 @@ xmlns:layout="sap.ui.layout">
 				</ColumnListItem>
 			</items>
 		</Table> -->
-		<!-- <form:SimpleForm id="empForm">
+		<form:SimpleForm id="empForm">
 			<form:content>
 				<Label text="Id"></Label>
-				<Input value="{items>EMP_ID}" />
+				<Text text="{items>EMP_ID}" />
 				<Label text="Name"></Label>
-				<Input value="{items>EMP_NAME}"/>
-				<Label text="Bood Group"></Label>
-				<Input value="{items>EMP_BLODD_GRP}"/>
+				<Text text="{items>EMP_NAME}"/>
+				<Label text="Blood Group"></Label>
+				<Text text="{items>EMP_BLODD_GRP}"/>
 				<Label text="Designation"></Label>
-				<Input value="{items>EMP_DESIG}"/>
+				<Text text="{items>EMP_DESIG}"/>
 				<Label text="Email"></Label>
-				<Input value="{items>EMP_EMAIL}"/>
+				<Text text="{items>EMP_EMAIL}"/>
 				<Label text="Contact"></Label>
-				<Input value="{items>EMP_CONT}"/>
+				<Text text="{items>EMP_CONT}"/>
 				<Label text="Address"></Label>
-				<Input value="{items>EMP_ADDRESS}"/>
+				<Text text="{items>EMP_ADDRESS}"/>
 				<Label text="Branch"></Label>
-				<Input value="{items>EMP_BRANCH}"/>
+				<Text text="{items>EMP_BRANCH}"/>
 			</form:content>
-		</form:SimpleForm> -->
-		<Table items="{/EmployeeExperience}" id="empForm1">
-			<columns>
-				<Column ><Label text="ID"/></Column>
-				<Column ><Label text="ID"/></Column>
-				<Column ><Label text="Comapny Name"/></Column>
-				<Column ><Label text="Role"/></Column>
-				<Column ><Label text="Start Date"/></Column>
-				<Column ><Label text="End Date"/></Column>
-				<Column ><Label text="Responsibilities"/></Column>
-			</columns>
-			<items>
-				<ColumnListItem type="Navigation" press="NavToEnd">
-					<cells>
-						<Text text="{ID}"></Text>
-						<Text text="{EmployeeID_EMP_ID}"></Text>
-						<Text text="{CompanyName}"></Text>
-						<Text text="{Role}"></Text>
-						<Text text="{StartDate}" ></Text>
-						<Text text="{EndDate}"></Text>
-						<Text text="{Responsibilities}"></Text>
-					</cells>
-				</ColumnListItem>
-			</items>
-		</Table>
+		</form:SimpleForm>
 	</Page>
 </mvc:View>

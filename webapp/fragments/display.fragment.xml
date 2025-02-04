@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
+xmlns= "sap.m"
+>
+    <Dialog id="displayDialog">
+        <form:SimpleForm >
+            <form:content>
+                <Label text="ID"/>
+                <Text id="detail1" text="{items>EMP_ID}"></Text>
+                <Label text="Name"/>
+                <Text id="detail2" text="{items>EMP_NAME}"></Text>
+                <Label text="Blood Group"/>
+                <Text id="detail3" text="{items>EMP_ID}"></Text>
+                <Label text="Designation"/>
+                <Text id="detail4" text="{items>EMP_ID}"></Text>
+                <Label text="Email"/>
+                <Text id="detail5" text="{items>EMP_ID}"></Text>
+                <Label text="Contact"/>
+                <Text id="detail6" text="{items>EMP_ID}"></Text>
+                <Label text="Address"/>
+                <Text id="detail7" text="{items>EMP_ID}"></Text>
+                <Label text="Branch"/>
+                <Text id="detail8" text="{items>EMP_ID}"></Text>
+                <Label text="Contact"/>
+                <Text id="detail9" text="{items>EMP_ID}"></Text>
+            </form:content>
+        </form:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>

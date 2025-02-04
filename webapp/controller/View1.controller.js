@@ -12,7 +12,6 @@ sap.ui.define([
             that.oEventBus = that.getOwnerComponent().getEventBus();
         },
         NavToMid: function(oEvent){
-            var oTable = that.byId("empData");
             var oItem = oEvent.getSource().getBindingContext().getProperty();
             that.oEventBus.publish("flexible","setView2",oItem);
         },
@@ -40,11 +39,5 @@ sap.ui.define([
             aSorter.push(new sap.ui.model.Sorter("EMP_NAME", this.bDescending, bGroup));
             oBinding.sort(aSorter);
         },
-        // onAdd: function(){
-        //     if(!that.createDialog){
-        //         that.createDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.create",that)
-        //     }
-        //     that.createDialog.open();
-        // }
     });
 });
