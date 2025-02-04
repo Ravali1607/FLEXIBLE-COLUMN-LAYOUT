@@ -7,11 +7,12 @@ sap.ui.define([
     return Controller.extend("flexiblecolumnlayout.controller.View3", {
         onInit() {
             that=this;
+            var oModel = that.getOwnerComponent().getModel();
             this.oEventBus = this.getOwnerComponent().getEventBus();
             this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
         },
         onAfterRendering: function(){
-            this.oEventBus.subscribe("flexible","setView3",this.oBranch,this);
+            this.oBranch();
         },
         oBranch: function(sChannel,sEvent,oData){
             if(oData && oData.branch.EMP_BRANCH){
@@ -24,7 +25,6 @@ sap.ui.define([
                             plant : filteredBranchData
                         })
                         that.byId("plantData").setModel(oModel);
-                        // that.getView().byId("plantData").setModel(oModel);
                     },error: function(error){
                         sap.m.MessageToast.show("Error");
                         console.log(error);
@@ -35,15 +35,32 @@ sap.ui.define([
         onClose: function(){
             this.oEventBus.publish("flexible","setView2");
         },
-        onFullScreen: function(){
-            var viewId = that.byId("page3");
-            var oButton = that.byId("fullScreenButton");
-            oFlexible.setLayout(fioriLibrary.LayoutType.EndColFullScreen);
-        },
-        forNextPage: function() {
-            var oRouter = that.getOwnerComponent().getRouter();  
-            oRouter.navTo("View4"); 
-        }
+        // onFullScreen: function(){
+        //     var viewId = that.byId("page3");
+        //     var oButton = that.byId("fullScreenButton");
+        //     oFlexible.setLayout(fioriLibrary.LayoutType.EndColFullScreen);
+        // },
+        // onFullScreen: function () {
+        //     var oFCL = this.getView().getParent().getParent(); // Get the FlexibleColumnLayout
+        //     oFCL.setLayout(sap.f.LayoutType.EndColumnFullScreen); // Expand third column to full-screen
+
+        // }
+        onToggleFullScreen: function () {
+            var oFCL = this.getView().getParent().getParent(); // Get FlexibleColumnLayout
+            var oButton = this.getView().byId("btnFullScreen"); // Get button reference
+            var sCurrentLayout = oFCL.getLayout(); // Get current layout
         
+            if (sCurrentLayout === sap.f.LayoutType.EndColumnFullScreen) {
+                oFCL.setLayout(sap.f.LayoutType.ThreeColumnsMidExpanded); // Restore layout
+                oButton.setIcon("sap-icon://full-screen"); // Update button text
+            } else {
+                oFCL.setLayout(sap.f.LayoutType.EndColumnFullScreen); // Expand third column
+                oButton.setIcon("sap-icon://exit-full-screen"); // Update button text
+            }
+        },
+        forNextPage: function(){
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);    
+            oRouter.navTo("View4");
+        }
     });
 });

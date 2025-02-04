@@ -2,13 +2,13 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page1" title="EMPLOYEE">
-    <!-- <Button text="Nav to Mid" press="NavToMid"></Button> -->
-    <Toolbar >
-        <ToolbarSpacer width="900px"></ToolbarSpacer>
-        <SearchField id="search" liveChange="searchField"></SearchField>
-        <Button icon="sap-icon://add" press="onAdd"></Button>
-        <Button icon="sap-icon://sort" press="onSort"></Button>
-    </Toolbar>
+	<Bar>
+		<contentRight>	
+			<Button text="Download" icon="sap-icon://download" press="excelDownload" />
+			<Button text="Upload" icon="sap-icon://upload" press="excelUpload"></Button>
+		</contentRight>
+
+	</Bar>
         <Table items="{/EmployeeExperience}" id="empExpTable">
 			<columns>
 				<Column ><Label text="ID"/></Column>

@@ -3,13 +3,13 @@ xmlns:form="sap.ui.layout.form"
 xmlns:layout="sap.ui.layout">
 	<Page id="page2" title="Details of an Employee">
 		<headerContent>
-		<Button icon="sap-icon://full-screen" press="onFullScreen"></Button>
+		<Button id="btnFullScreen1" icon="sap-icon://full-screen" press=".onToggleFullScreen"/>
 		<Button icon="sap-icon://decline" press="onClose"></Button>
 		</headerContent>
-		<Bar >
+		<!-- <Bar >
 			<contentRight><Button icon="sap-icon://create-form" press="onCreate"></Button></contentRight>
-		</Bar>
-		<!-- <Table items="{/items}" id="empForm">
+		</Bar> -->
+		<Table items="{/items}" id="empForm">
 			<columns>
 				<Column ><Label text="ID"/></Column>
 				<Column ><Label text="NAME"/></Column>
@@ -34,26 +34,26 @@ xmlns:layout="sap.ui.layout">
 					</cells>
 				</ColumnListItem>
 			</items>
-		</Table> -->
-		<form:SimpleForm id="empForm">
+		</Table>
+		<!-- <form:SimpleForm id="empForm" binding="{items}" >
 			<form:content>
 				<Label text="Id"></Label>
-				<Text text="{items>EMP_ID}" />
+				<Text text="{EMP_ID}" />
 				<Label text="Name"></Label>
-				<Text text="{items>EMP_NAME}"/>
+				<Text text="{EMP_NAME}"/>
 				<Label text="Blood Group"></Label>
-				<Text text="{items>EMP_BLODD_GRP}"/>
+				<Text text="{EMP_BLODD_GRP}"/>
 				<Label text="Designation"></Label>
-				<Text text="{items>EMP_DESIG}"/>
+				<Text text="{EMP_DESIG}"/>
 				<Label text="Email"></Label>
-				<Text text="{items>EMP_EMAIL}"/>
+				<Text text="{EMP_EMAIL}"/>
 				<Label text="Contact"></Label>
-				<Text text="{items>EMP_CONT}"/>
+				<Text text="{EMP_CONT}"/>
 				<Label text="Address"></Label>
-				<Text text="{items>EMP_ADDRESS}"/>
+				<Text text="{EMP_ADDRESS}"/>
 				<Label text="Branch"></Label>
-				<Text text="{items>EMP_BRANCH}"/>
+				<Text text="{EMP_BRANCH}"/>
 			</form:content>
-		</form:SimpleForm>
+		</form:SimpleForm> -->
 	</Page>
 </mvc:View>

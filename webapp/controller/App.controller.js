@@ -33,7 +33,7 @@ sap.ui.define([
         viewName: "flexiblecolumnlayout.view.View2",
       }).then(function(View2) {
         this.oFlexible.addMidColumnPage(View2);
-        this.oFlexible.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
+        this.oFlexible.setLayout(fioriLibrary.LayoutType.TwoColumnsBeginExpanded);
       }.bind(this));
     },
     setView3: function(){

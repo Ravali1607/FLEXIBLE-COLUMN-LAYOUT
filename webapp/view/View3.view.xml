@@ -1,9 +1,16 @@
 <mvc:View xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="flexiblecolumnlayout.controller.View3" height="100%">
 	<Page id="page3" title="Plant Information">
         <headerContent>
-			<Button icon="sap-icon://full-screen" press="onFullScreen" id="fullScreenButton"></Button>
+			<Button id="btnFullScreen" icon="sap-icon://full-screen" press=".onToggleFullScreen"/>
             <Button icon="sap-icon://decline" press="onClose"></Button>
         </headerContent>
+		<List id="plantData" items="{/plant}">
+			<StandardListItem title="{PLANT_ID}"
+			description="{PLANT_NAME}"
+			>
+			</StandardListItem>
+		</List>
+		<Button text="Navigation to Next Page" press="forNextPage"></Button>
 		<!-- <Table id="plantData" items="{/plant}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
@@ -48,12 +55,6 @@
 				<Text text="{plant>PLANT_CUST_COUNT}"/>
 			</form:content>
 		</form:SimpleForm> -->
-		<List id="plantData" items="{/plant}">
-			<StandardListItem title="{PLANT_ID}"
-			description="{PLANT_NAME}"
-			>
-			</StandardListItem>
-		</List>
-		<Button text="Navigation to Next Page" press="forNextPage"></Button>
+		
 	</Page>
 </mvc:View>

@@ -42,32 +42,49 @@ sap.ui.define([
         onClose: function(){
             this.oEventBus.publish("flexible","setView1");
         },
-        onCreate: function(){
-            if(!that.createDialog){
-                that.createDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.create",that);
+        onToggleFullScreen: function () {
+            var oFCL = this.getView().getParent().getParent(); // Get FlexibleColumnLayout
+            var oButton = this.getView().byId("btnFullScreen1"); // Get button reference
+            var sCurrentLayout = oFCL.getLayout(); // Get current layout
+        
+            if (sCurrentLayout === sap.f.LayoutType.MidColumnFullScreen) {
+                oFCL.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded); // Restore layout
+                oButton.setIcon("sap-icon://full-screen"); // Update icon
+            } else {
+                oFCL.setLayout(sap.f.LayoutType.MidColumnFullScreen); // Expand second column
+                oButton.setIcon("sap-icon://exit-full-screen"); // Update icon
             }
-            that.createDialog.open();
         },
-        onSubmit: function(){
-            let oEmp = {
-                EmployeeID_EMP_ID :sap.ui.getCore().byId("input1").getValue(),
-                CompanyName :sap.ui.getCore().byId("input2").getValue(),
-                Role :sap.ui.getCore().byId("input3").getValue(),
-                StartDate :sap.ui.getCore().byId("input4").getValue(),
-                EndDate: sap.ui.getCore().byId("input5").getValue(),
-                Responsibilities :sap.ui.getCore().byId("input6").getValue(),
-            }
-            var oModel = that.getOwnerComponent().getModel();
-            oModel.create("/EmployeeExperience",oEmp,{
-                success:function(response){
-                    sap.m.MessageToast.show("successfull");
-                    oModel.refresh();
-                },error:function(error){
-                    sap.m.MessageToast.show("Error");
-                    console.log(error);
-                }
-            })
-            that.createDialog.close();
-        }
+        // onCreate: function(){
+        //     if(!that.createDialog){
+        //         that.createDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.create",that);
+        //     }
+        //     that.createDialog.open();
+        // },
+        // onSubmit: function(){
+        //     let oEmp = {
+        //         EmployeeID_EMP_ID :sap.ui.getCore().byId("input1").getValue(),
+        //         CompanyName :sap.ui.getCore().byId("input2").getValue(),
+        //         Role :sap.ui.getCore().byId("input3").getValue(),
+        //         StartDate :sap.ui.getCore().byId("input4").getValue(),
+        //         EndDate: sap.ui.getCore().byId("input5").getValue(),
+        //         Responsibilities :sap.ui.getCore().byId("input6").getValue(),
+        //     }
+        //     var oModel = that.getOwnerComponent().getModel();
+        //     oModel.create("/EmployeeExperience",oEmp,{
+        //         success:function(response){
+        //             sap.m.MessageToast.show("successfull");
+        //             oModel.refresh();
+        //         },error:function(error){
+        //             sap.m.MessageToast.show("Error");
+        //             console.log(error);
+        //         }
+        //     })
+        //     that.createDialog.close();
+        // },
+        // onFullScreen: function(){
+        //     var oFCL = this.getView().getParent().getParent(); // Get the FlexibleColumnLayout
+        //     oFCL.setLayout(sap.f.LayoutType.MidColumnFullScreen); // Expand second column to full-screen,
+        // },
     });
 });

@@ -2,6 +2,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page4" title="FULL PAGE">
+        <Bar >
+            <contentRight><Button icon="sap-icon://decline" press="onNavBack"></Button></contentRight>
+        </Bar>
         <Text text="FULL SCREEN PAGE"></Text>
     </Page>
 </mvc:View>
