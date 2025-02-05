@@ -67,6 +67,9 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {}
+      },
+      "globalfclModel":{
+        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {

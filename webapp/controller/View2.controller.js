@@ -10,6 +10,10 @@ sap.ui.define([
             this.oEventBus = this.getOwnerComponent().getEventBus();
             this.oEventBus.subscribe("flexible","setView2",this.data,this);
         },
+        onAfterRendering: function(){
+            var oGlobal = that.getOwnerComponent().getModel("globalfclModel");
+            // oGlobal.getProperty("EMP_ID");
+        },
         data: function(schannel,sEventId,oData){
             if(oData && oData.EmployeeID_EMP_ID){
                 var oItem = oData.EmployeeID_EMP_ID;

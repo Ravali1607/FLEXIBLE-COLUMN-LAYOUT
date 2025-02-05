@@ -1,15 +1,18 @@
 <mvc:View xmlns:tnt="sap.tnt" xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="flexiblecolumnlayout.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page1" title="EMPLOYEE">
-	<Bar>
-		<contentRight>	
-			<Button text="Download" icon="sap-icon://download" press="excelDownload" />
-			<Button text="Upload" icon="sap-icon://upload" press="excelUpload"></Button>
-		</contentRight>
-
-	</Bar>
+    <Page id="page1">
         <Table items="{/EmployeeExperience}" id="empExpTable">
+		<headerToolbar>
+			<OverflowToolbar >
+				<content>
+					<Title text="EMPLOYEE EXPERIENCE INFO"></Title>
+					<ToolbarSpacer ></ToolbarSpacer>
+					<Button text="Download" icon="sap-icon://download" press="excelDownload" />
+					<Button text="Upload" icon="sap-icon://upload" press="excelUpload" />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
 			<columns>
 				<Column ><Label text="ID"/></Column>
 				<Column ><Label text="Comapny Name"/></Column>
@@ -24,8 +27,8 @@
 						<Text text="{ID}"></Text>
 						<Text text="{CompanyName}"></Text>
 						<Text text="{Role}"></Text>
-						<Text text="{StartDate}" ></Text>
-						<Text text="{EndDate}"></Text>
+						<Text text="{path : 'StartDate', formatter : '.dateFormat'}"></Text>
+						<Text text="{path : 'EndDate', formatter : '.dateFormat'}"></Text>
 						<Text text="{Responsibilities}"></Text>
 					</cells>
 				</ColumnListItem>
