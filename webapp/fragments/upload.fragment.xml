@@ -1,16 +1,17 @@
-<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
+<core:FragmentDefinition xmlns:unified="sap.ui.unified" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
 xmlns= "sap.m"
 >
-    <Dialog id="upload">
-         <layout:VerticalLayout>
-        <ToolbarSpacer />
-        <unified:FileUploader 
-            id="myFileUploader" 
-            name="myFileUpload" 
-            tooltip="Upload your file to the local server"  
+    <Dialog id="upload" title="Upload file">
+            <unified:FileUploader 
             class="sapUiTinyMargin"
-            change="onFileChange"
-        />
-    </layout:VerticalLayout>
+            id="fileUploader"
+            change="fileUpload"
+            ></unified:FileUploader>
+            <footer>
+                <Toolbar >
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button text="Upload" press="uploadExcel"></Button>
+                </Toolbar>
+            </footer>
     </Dialog>
 </core:FragmentDefinition>

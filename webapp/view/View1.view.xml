@@ -9,7 +9,7 @@
 					<Title text="EMPLOYEE EXPERIENCE INFO"></Title>
 					<ToolbarSpacer ></ToolbarSpacer>
 					<Button text="Download" icon="sap-icon://download" press="excelDownload" />
-					<Button text="Upload" icon="sap-icon://upload" press="excelUpload" />
+					<Button text="Upload" icon="sap-icon://upload" press="fileSelection" />
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
