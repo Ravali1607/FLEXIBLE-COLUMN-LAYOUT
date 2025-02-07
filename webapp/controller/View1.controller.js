@@ -17,20 +17,23 @@ sap.ui.define([
             var oModel = that.getOwnerComponent().getModel("globalfclModel");
 
         },
+        /*  -------------    Navigate to master page to detail page   ---------------- */
         NavToMid: function(oEvent){
             var oModel = that.getOwnerComponent().getModel("globalfclModel");
             var oItem = oEvent.getSource().getBindingContext().getProperty();
             that.oEventBus.publish("flexible","setView2",oItem);
         },
+        /* --------------  Changing the date format using formatter -----------------*/
         dateFormat: function(date){
             if (date) {
                     var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "YYYY-MM-dd"});
                     return oDateFormat.format(new Date(date));
             }  
         },
+        /*  -----------------  Downloading an excel file with Data in view 1 -----------------*/
         excelDownload: function(){
             var rows = [];
-            var table = that.getView().byId("empExpTable").getItems();      // to get the data in the table
+            var table = that.getView().byId("empExpTable").getItems();      
             table.forEach(val => {
                 var data = val.getBindingContext().getObject();             // to get values in the each row
                 delete data['__metadata'];                                  // to delete the column metadata which is not required for us
@@ -41,12 +44,32 @@ sap.ui.define([
             XLSX.utils.book_append_sheet(workbook,worksheet,"EMPLOYEE INFO");   //storing the worksheet data into workbook with the given name
             XLSX.writeFile(workbook,"EMPLOYEE.xlsx");                       //download the file with the given name with extension
         },
+        /* ---------------------- Downloading an excel file which contains the headers of three views ------------------------*/
+        emptyDownload: function(){
+            var rows= [];
+            // var headers = 
+            // ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH"];
+            var headers = 
+            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities"];
+            rows.push(headers);
+            // const worksheet = XLSX.utils.json_to_sheet(rows);
+            // const workbook = XLSX.utils.book_new();
+            // XLSX.utils.book_append_sheet(workbook,worksheet,"Data");
+            // XLSX.writeFile(workbook,"Data.xlsx");
+            var oSheet = XLSX.utils.aoa_to_sheet(rows);
+            var oWorkbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(oWorkbook, oSheet, "Employee Data");  
+            var sFileName = "EmployeeData.xlsx";
+            XLSX.writeFile(oWorkbook, sFileName);
+        },
+        /*  ------------------- for opening the fragment to upload file --------------*/
         fileSelection: function(){
             if(!that.upload){
                 that.upload = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.upload",that);
             }
             that.upload.open();
         },
+        /* ---------------------  storing the selected excel file data into an array ------------- */
         fileUpload: function(oEvent){
             var files = oEvent.getParameter("files");
             if(files.length>0){
@@ -70,9 +93,9 @@ sap.ui.define([
                 reader.readAsArrayBuffer(files[0]);
             }
         },
+        /*  ----------------------- to upload an excel file ------------------ */
         uploadExcel: function(){
             var jModel = that.jModel;
-            // var oData = [];
             jModel.forEach(function(entry){
                 var startdate = entry.StartDate;
                 startdate = new Date((startdate - 25569) * 86400 * 1000);
@@ -89,25 +112,44 @@ sap.ui.define([
                 var formattedEndDate = `${year2}-${month2}-${day2}`;
                 console.log(formattedEndDate);
                 var oEntry={
-                    ID : entry.ID,
+                    EmployeeID_EMP_ID : entry.EmployeeID_EMP_ID,
                     CompanyName : entry.CompanyName,
                     Role : entry.Role,
                     StartDate : formattedStartDate,
                     EndDate : formattedEndDate,
                     Responsibilities : entry.Responsibilities
                 }
-            //     oData.push(oEntry);
-            // })
-            var oModel = that.getOwnerComponent().getModel();
-            oModel.create("/EmployeeExperience",oEntry,{
-                success: function(response){
-                    sap.m.MessageToast.show("Excel Uploaded successfully!");
-                    console.log("success");
-                },error(error){
-                    console.log(error);
-                }      
+                var oModel = that.getOwnerComponent().getModel();
+                oModel.create("/EmployeeExperience",oEntry,{
+                    success: function(response){
+                        sap.m.MessageToast.show("Excel Uploaded successfully!");
+                        console.log("success");
+                    },error(error){
+                        console.log(error);
+                    }      
+                })
             })
-        })
+            // jModel.forEach(function(entry){
+            //     var oEmployee={
+            //         EMP_ID:entry.EMP_ID,
+            //         EMP_NAME:entry.EMP_NAME,
+            //         EMP_BLODD_GRP:entry.EMP_BLODD_GRP,
+            //         EMP_DESIG:entry.EMP_DESIG,
+            //         EMP_EMAIL:entry.EMP_EMAIL,
+            //         EMP_CONT:entry.EMP_CONT,
+            //         EMP_ADDRESS:entry.EMP_ADDRESS,
+            //         EMP_BRANCH:entry.EMP_BRANCH
+            //     }
+            //     var oModel1 = that.getOwnerComponent().getModel();
+            //     oModel1.create("/EMPLOYEE",oEmployee,{
+            //         success: function(response){
+            //             sap.m.MessageToast.show("Employee details entered successfully!");
+            //             console.log("successs");
+            //         },else(error){
+            //             console.log(error);
+            //         }
+            //     })
+            // })
         }
     });
 });

@@ -10,6 +10,7 @@
 					<ToolbarSpacer ></ToolbarSpacer>
 					<Button text="Download" icon="sap-icon://download" press="excelDownload" />
 					<Button text="Upload" icon="sap-icon://upload" press="fileSelection" />
+					<Button text="Download without data" icon="sap-icon://download-from-cloud" press="emptyDownload"></Button>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
