@@ -47,10 +47,10 @@ sap.ui.define([
         /* ---------------------- Downloading an excel file which contains the headers of three views ------------------------*/
         emptyDownload: function(){
             var rows= [];
-            // var headers = 
-            // ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH"];
             var headers = 
-            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities"];
+            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH"];
+            // var headers = 
+            // ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities"];
             rows.push(headers);
             // const worksheet = XLSX.utils.json_to_sheet(rows);
             // const workbook = XLSX.utils.book_new();
@@ -129,27 +129,27 @@ sap.ui.define([
                     }      
                 })
             })
-            // jModel.forEach(function(entry){
-            //     var oEmployee={
-            //         EMP_ID:entry.EMP_ID,
-            //         EMP_NAME:entry.EMP_NAME,
-            //         EMP_BLODD_GRP:entry.EMP_BLODD_GRP,
-            //         EMP_DESIG:entry.EMP_DESIG,
-            //         EMP_EMAIL:entry.EMP_EMAIL,
-            //         EMP_CONT:entry.EMP_CONT,
-            //         EMP_ADDRESS:entry.EMP_ADDRESS,
-            //         EMP_BRANCH:entry.EMP_BRANCH
-            //     }
-            //     var oModel1 = that.getOwnerComponent().getModel();
-            //     oModel1.create("/EMPLOYEE",oEmployee,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Employee details entered successfully!");
-            //             console.log("successs");
-            //         },else(error){
-            //             console.log(error);
-            //         }
-            //     })
-            // })
+            jModel.forEach(function(entry){
+                var oEmployee={
+                    EMP_ID:entry.EMP_ID,
+                    EMP_NAME:entry.EMP_NAME,
+                    EMP_BLODD_GRP:entry.EMP_BLODD_GRP,
+                    EMP_DESIG:entry.EMP_DESIG,
+                    EMP_EMAIL:entry.EMP_EMAIL,
+                    EMP_CONT:entry.EMP_CONT,
+                    EMP_ADDRESS:entry.EMP_ADDRESS,
+                    EMP_BRANCH:entry.EMP_BRANCH
+                }
+                var oModel1 = that.getOwnerComponent().getModel();
+                oModel1.create("/EMPLOYEE",oEmployee,{
+                    success: function(response){
+                        sap.m.MessageToast.show("Employee details entered successfully!");
+                        console.log("successs");
+                    },else(error){
+                        console.log(error);
+                    }
+                })
+            })
         }
     });
 });
