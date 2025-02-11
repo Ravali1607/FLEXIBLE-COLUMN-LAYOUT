@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
+xmlns= "sap.m"
+>
+    <Dialog id="plantDialog">
+        <form:SimpleForm >
+            <form:content>
+                <Label text="ID"/>
+                <Input id="plant1" ></Input>
+                <Label text="Name"/>
+                <Input id="plant2" ></Input>
+                <Label text="Location"/>
+                <Input id="plant3" ></Input>
+                <Label text="Avatar"/>
+                <!-- <DatePicker id="plant4"></DatePicker> -->
+                <Input id="plant4" ></Input>
+                <Label text="Contact"/>
+                <Input id="plant5"></Input>
+                <Label text="Email"/>
+                <!-- <TextArea id="inp" height="80px"></TextArea> -->
+                <Input id="plant6" ></Input>
+                <Label text="Head of the plant"/>
+                <Input id="plant7" />
+                <Label text="Revenue"></Label>
+                <Input id="plant8"></Input>
+                <Label text="Customer count"></Label>
+                <Input id="plant9"></Input>
+            </form:content>
+        </form:SimpleForm>
+        <footer>
+            <Toolbar >
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Submit" press="onSubmit"></Button>
+            </Toolbar>
+        </footer>
+
+    </Dialog>
+</core:FragmentDefinition>

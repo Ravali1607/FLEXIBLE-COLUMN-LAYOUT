@@ -4,14 +4,15 @@
 			<Button id="btnFullScreen" icon="sap-icon://full-screen" press=".onToggleFullScreen"/>
             <Button icon="sap-icon://decline" press="onClose"></Button>
         </headerContent>
-		<List id="plantData" items="{/plant}">
+		<!-- <List id="plantData" items="{/plant}">
 			<StandardListItem title="{PLANT_ID}"
 			description="{PLANT_NAME}"
 			>
 			</StandardListItem>
-		</List>
+		</List> -->
+		<Button text="Add" press="openFragment"></Button>
 		<Button text="Navigation to Next Page" press="forNextPage"></Button>
-		<!-- <Table id="plantData" items="{/plant}">
+		<Table id="plantData" items="{/PLANTS}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
 				<Column ><Label text="Name"></Label></Column>
@@ -34,7 +35,7 @@
 					<Text text="{PLANT_CUST_COUNT}"></Text>
 				</ColumnListItem>
 			</items>
-		</Table> -->
+		</Table>
 		<!-- <form:SimpleForm id="plantData" >
 			<form:content>
 				<Label text="ID" />
