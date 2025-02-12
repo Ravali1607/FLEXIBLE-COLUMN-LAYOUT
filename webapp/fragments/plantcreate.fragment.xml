@@ -11,12 +11,10 @@ xmlns= "sap.m"
                 <Label text="Location"/>
                 <Input id="plant3" ></Input>
                 <Label text="Avatar"/>
-                <!-- <DatePicker id="plant4"></DatePicker> -->
                 <Input id="plant4" ></Input>
                 <Label text="Contact"/>
                 <Input id="plant5"></Input>
                 <Label text="Email"/>
-                <!-- <TextArea id="inp" height="80px"></TextArea> -->
                 <Input id="plant6" ></Input>
                 <Label text="Head of the plant"/>
                 <Input id="plant7" />
@@ -32,6 +30,5 @@ xmlns= "sap.m"
                 <Button text="Submit" press="onSubmit"></Button>
             </Toolbar>
         </footer>
-
     </Dialog>
 </core:FragmentDefinition>

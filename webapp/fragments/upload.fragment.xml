@@ -6,6 +6,7 @@ xmlns= "sap.m"
             class="sapUiTinyMargin"
             id="fileUploader"
             change="fileUpload"
+            multiple="true"
             ></unified:FileUploader>
             <footer>
                 <Toolbar >

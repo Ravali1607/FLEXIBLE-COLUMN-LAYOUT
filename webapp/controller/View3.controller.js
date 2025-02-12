@@ -62,38 +62,38 @@ sap.ui.define([
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);    
             oRouter.navTo("View4");
         },
-        openFragment: function(){
-            if(!that.plantDialog){
-                that.plantDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.plantcreate",that);
-            }
-            that.plantDialog.open();
-        },
-        onSubmit:function(){
-            let oPlant = {
-                PLANT_ID :sap.ui.getCore().byId("plant1").getValue(),
-                PLANT_NAME :sap.ui.getCore().byId("plant2").getValue(),
-                PLANT_LOC :sap.ui.getCore().byId("plant3").getValue(),
-                PLANT_AVATAR :sap.ui.getCore().byId("plant4").getValue(),
-                PLANT_CONT: sap.ui.getCore().byId("plant5").getValue(),
-                PLANT_EMAIL :sap.ui.getCore().byId("plant6").getValue(),
-                PLANT_HEAD :sap.ui.getCore().byId("plant7").getValue(),
-                PLANT_REVENUE :sap.ui.getCore().byId("plant8").getValue(),
-                PLANT_CUST_COUNT :sap.ui.getCore().byId("plant9").getValue(),
-            }
-            var oModel = that.getOwnerComponent().getModel();
-            oModel.create("/PLANTS",oPlant,{
-                success:function(response){
-                    sap.m.MessageToast.show("Plant Details added successfully");
-                    oModel.refresh();
-                    sap.ui.getCore().byId("plantData").getModel().refresh(true);
-                },error:function(error){
-                    sap.m.MessageToast.show("Error while adding Plant");
-                    console.log(error);
-                }
-            })
-            that.onRefresh();
-            that.plantDialog.close();
-            oModel.refresh();
-        },
+        // openFragment: function(){
+        //     if(!that.plantDialog){
+        //         that.plantDialog = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.plantcreate",that);
+        //     }
+        //     that.plantDialog.open();
+        // },
+        // onSubmit:function(){
+        //     let oPlant = {
+        //         PLANT_ID :sap.ui.getCore().byId("plant1").getValue(),
+        //         PLANT_NAME :sap.ui.getCore().byId("plant2").getValue(),
+        //         PLANT_LOC :sap.ui.getCore().byId("plant3").getValue(),
+        //         PLANT_AVATAR :sap.ui.getCore().byId("plant4").getValue(),
+        //         PLANT_CONT: sap.ui.getCore().byId("plant5").getValue(),
+        //         PLANT_EMAIL :sap.ui.getCore().byId("plant6").getValue(),
+        //         PLANT_HEAD :sap.ui.getCore().byId("plant7").getValue(),
+        //         PLANT_REVENUE :sap.ui.getCore().byId("plant8").getValue(),
+        //         PLANT_CUST_COUNT :sap.ui.getCore().byId("plant9").getValue(),
+        //     }
+        //     var oModel = that.getOwnerComponent().getModel();
+        //     oModel.create("/PLANTS",oPlant,{
+        //         success:function(response){
+        //             sap.m.MessageToast.show("Plant Details added successfully");
+        //             oModel.refresh();
+        //             sap.ui.getCore().byId("plantData").getModel().refresh(true);
+        //         },error:function(error){
+        //             sap.m.MessageToast.show("Error while adding Plant");
+        //             console.log(error);
+        //         }
+        //     })
+        //     that.onRefresh();
+        //     that.plantDialog.close();
+        //     oModel.refresh();
+        // },
     });
 });

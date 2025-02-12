@@ -21,7 +21,7 @@
 				<Column ><Text text="Start Date"/></Column>
 				<Column ><Text text="End Date"/></Column>
 				<Column ><Text text="Responsibilities"/></Column>
-				<Column ><Text text="Action"></Text></Column>
+				<!-- <Column ><Text text="Action"></Text></Column> -->
 			</columns>
 			<items>
 				<ColumnListItem type="Navigation" press="NavToMid">
@@ -32,7 +32,7 @@
 						<Text text="{path : 'StartDate', formatter : '.dateFormat'}"></Text>
 						<Text text="{path : 'EndDate', formatter : '.dateFormat'}"></Text>
 						<Text text="{Responsibilities}"></Text>
-						<Button icon="sap-icon://delete" press="onDeleteEmp"></Button>
+						<!-- <Button icon="sap-icon://delete" press="onDeleteEmp"></Button> -->
 					</cells>
 				</ColumnListItem>
 			</items>

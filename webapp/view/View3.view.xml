@@ -10,13 +10,14 @@
 			>
 			</StandardListItem>
 		</List> -->
-		<Button text="Add" press="openFragment"></Button>
-		<Button text="Navigation to Next Page" press="forNextPage"></Button>
-		<Table id="plantData" items="{/PLANTS}">
+		<!-- <Button text="Add" press="openFragment"></Button> -->
+		
+		<Table id="plantData" items="{/plant}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
 				<Column ><Label text="Name"></Label></Column>
 				<Column ><Label text="Location"></Label></Column>
+				<Column ><Label text="Avatar"/></Column>
 				<Column ><Label text="Contact"></Label></Column>
 				<Column ><Label text="Email"></Label></Column>
 				<Column ><Label text="Head of the Plant"></Label></Column>
@@ -28,6 +29,7 @@
 					<Text text="{PLANT_ID}"></Text>
 					<Text text="{PLANT_NAME}"></Text>
 					<Text text="{PLANT_LOC}"></Text>
+					<Avatar src="{PLANT_AVATAR}"></Avatar>
 					<Text text="{PLANT_CONT}"></Text>
 					<Text text="{PLANT_EMAIL}"></Text>
 					<Text text="{PLANT_HEAD}"></Text>
@@ -36,6 +38,11 @@
 				</ColumnListItem>
 			</items>
 		</Table>
+		<footer>
+		<Toolbar>
+			<Button text="Navigation to Next Page" press="forNextPage"></Button>
+			</Toolbar>
+		</footer>
 		<!-- <form:SimpleForm id="plantData" >
 			<form:content>
 				<Label text="ID" />
