@@ -47,12 +47,12 @@ sap.ui.define([
         /* ---------------------- Downloading an excel file which contains the headers of three views ------------------------*/
         emptyDownload: function(){
             var rows= [];
-            // var headers = 
-            // ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH"];
+            var headers = 
+            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH"];
             // var headers = 
             // ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities"];
-            var headers = 
-            ["PLANT_ID","PLANT_NAME","PLANT_LOC","PLANT_AVATAR","PLANT_CONT","PLANT_EMAIL","PLANT_HEAD","PLANT_REVENUE","PLANT_CUST_COUNT"]
+            // var headers = 
+            // ["PLANT_ID","PLANT_NAME","PLANT_LOC","PLANT_AVATAR","PLANT_CONT","PLANT_EMAIL","PLANT_HEAD","PLANT_REVENUE","PLANT_CUST_COUNT"]
             rows.push(headers);
             // const worksheet = XLSX.utils.json_to_sheet(rows);
             // const workbook = XLSX.utils.book_new();
@@ -98,74 +98,52 @@ sap.ui.define([
         /*  ----------------------- to upload an excel file ------------------ */
         uploadExcel: function(){
             var jModel = that.jModel;
-            // jModel.forEach(function(entry){
-            //     var startdate = entry.StartDate;
-            //     startdate = new Date((startdate - 25569) * 86400 * 1000);
-            //     var year1 = startdate.getFullYear();
-            //     var month1 = ("0" + (startdate.getMonth() + 1)).slice(-2); 
-            //     var day1 = ("0" + startdate.getDate()).slice(-2);
-            //     var formattedStartDate = `${year1}-${month1}-${day1}`;
-            //     console.log(formattedStartDate);
-            //     var enddate = entry.EndDate;
-            //     enddate = new Date((enddate - 25569) * 86400 * 1000);
-            //     var year2 = enddate.getFullYear();
-            //     var month2 = ("0" + (enddate.getMonth() + 1)).slice(-2); 
-            //     var day2 = ("0" + enddate.getDate()).slice(-2);
-            //     var formattedEndDate = `${year2}-${month2}-${day2}`;
-            //     console.log(formattedEndDate);
-            //     var oEntry={
-            //         EmployeeID_EMP_ID : entry.EmployeeID_EMP_ID,
-            //         CompanyName : entry.CompanyName,
-            //         Role : entry.Role,
-            //         StartDate : formattedStartDate,
-            //         EndDate : formattedEndDate,
-            //         Responsibilities : entry.Responsibilities
-            //     }
-            //     var oModel = that.getOwnerComponent().getModel();
-            //     oModel.create("/EmployeeExperience",oEntry,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Excel Uploaded successfully!");
-            //             console.log("success");
-            //         },error(error){
-            //             console.log(error);
-            //         }      
-            //     })
-            // })
-            // jModel.forEach(function(entry){
-            //     var oEmployee={
-            //         EMP_ID:entry.EMP_ID,
-            //         EMP_NAME:entry.EMP_NAME,
-            //         EMP_BLODD_GRP:entry.EMP_BLODD_GRP,
-            //         EMP_DESIG:entry.EMP_DESIG,
-            //         EMP_EMAIL:entry.EMP_EMAIL,
-            //         EMP_CONT:entry.EMP_CONT + "",
-            //         EMP_ADDRESS:entry.EMP_ADDRESS,
-            //         EMP_BRANCH:entry.EMP_BRANCH
-            //     }
-            //     var oModel1 = that.getOwnerComponent().getModel();
-            //     oModel1.create("/EMPLOYEE",oEmployee,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Employee details entered successfully!");
-            //             console.log("successs");
-            //         },else(error){
-            //             console.log(error);
-            //         }
-            //     })
-            // })
             jModel.forEach(function(entry){
-                var oPlant={
-                    PLANT_ID:entry.PLANT_ID,
-                    PLANT_NAME:entry.PLANT_NAME,
-                    PLANT_LOC:entry.PLANT_LOC,
-                    PLANT_AVATAR:entry.PLANT_AVATAR,
-                    PLANT_CONT:entry.PLANT_CONT,
-                    PLANT_EMAIL:entry.PLANT_EMAIL,
-                    PLANT_HEAD:entry.PLANT_HEAD,
-                    PLANT_REVENUE:entry.PLANT_REVENUE,
-                    PLANT_CUST_COUNT:entry.PLANT_CUST_COUNT
+                var startdate = entry.StartDate;
+                startdate = new Date((startdate - 25569) * 86400 * 1000);
+                var year1 = startdate.getFullYear();
+                var month1 = ("0" + (startdate.getMonth() + 1)).slice(-2); 
+                var day1 = ("0" + startdate.getDate()).slice(-2);
+                var formattedStartDate = `${year1}-${month1}-${day1}`;
+                console.log(formattedStartDate);
+                var enddate = entry.EndDate;
+                enddate = new Date((enddate - 25569) * 86400 * 1000);
+                var year2 = enddate.getFullYear();
+                var month2 = ("0" + (enddate.getMonth() + 1)).slice(-2); 
+                var day2 = ("0" + enddate.getDate()).slice(-2);
+                var formattedEndDate = `${year2}-${month2}-${day2}`;
+                console.log(formattedEndDate);
+                var oEntry={
+                    EmployeeID_EMP_ID : entry.EmployeeID_EMP_ID,
+                    CompanyName : entry.CompanyName,
+                    Role : entry.Role,
+                    StartDate : formattedStartDate,
+                    EndDate : formattedEndDate,
+                    Responsibilities : entry.Responsibilities
+                }
+                var oModel = that.getOwnerComponent().getModel();
+                oModel.create("/EmployeeExperience",oEntry,{
+                    success: function(response){
+                        sap.m.MessageToast.show("Excel Uploaded successfully!");
+                        console.log("success");
+                    },error(error){
+                        console.log(error);
+                    }      
+                })
+            })
+            jModel.forEach(function(entry){
+                var oEmployee={
+                    EMP_ID:entry.EMP_ID,
+                    EMP_NAME:entry.EMP_NAME,
+                    EMP_BLODD_GRP:entry.EMP_BLODD_GRP,
+                    EMP_DESIG:entry.EMP_DESIG,
+                    EMP_EMAIL:entry.EMP_EMAIL,
+                    EMP_CONT:entry.EMP_CONT + "",
+                    EMP_ADDRESS:entry.EMP_ADDRESS,
+                    EMP_BRANCH:entry.EMP_BRANCH
                 }
                 var oModel1 = that.getOwnerComponent().getModel();
-                oModel1.create("/PLANTS",oPlant,{
+                oModel1.create("/EMPLOYEE",oEmployee,{
                     success: function(response){
                         sap.m.MessageToast.show("Employee details entered successfully!");
                         console.log("successs");
@@ -174,23 +152,45 @@ sap.ui.define([
                     }
                 })
             })
+            // jModel.forEach(function(entry){
+            //     var oPlant={
+            //         PLANT_ID:entry.PLANT_ID,
+            //         PLANT_NAME:entry.PLANT_NAME,
+            //         PLANT_LOC:entry.PLANT_LOC,
+            //         PLANT_AVATAR:entry.PLANT_AVATAR,
+            //         PLANT_CONT:entry.PLANT_CONT,
+            //         PLANT_EMAIL:entry.PLANT_EMAIL,
+            //         PLANT_HEAD:entry.PLANT_HEAD,
+            //         PLANT_REVENUE:entry.PLANT_REVENUE,
+            //         PLANT_CUST_COUNT:entry.PLANT_CUST_COUNT
+            //     }
+            //     var oModel1 = that.getOwnerComponent().getModel();
+            //     oModel1.create("/PLANTS",oPlant,{
+            //         success: function(response){
+            //             sap.m.MessageToast.show("Employee details entered successfully!");
+            //             console.log("successs");
+            //         },else(error){
+            //             console.log(error);
+            //         }
+            //     })
+            // })
         },
-        // onDeleteEmp: function(oEvent){
-        //         var oButton = oEvent.getSource();
-        //         var oContext = oButton.getBindingContext();
-        //         var oModel = that.getOwnerComponent().getModel();
-        //         var sPath = oContext.getPath();
-        //         oModel.remove(sPath,{
-        //             success:function()
-        //             {
-        //                  sap.m.MessageToast.show("Employee Deleted");
-        //             },
-        //             error:function(error)
-        //             {
-        //                 console.log(error)
-        //                 sap.m.MessageToast.show("Error");
-        //             }
-        //         })
-        //     },
+        onDeleteEmp: function(oEvent){
+                var oButton = oEvent.getSource();
+                var oContext = oButton.getBindingContext();
+                var oModel = that.getOwnerComponent().getModel();
+                var sPath = oContext.getPath();
+                oModel.remove(sPath,{
+                    success:function()
+                    {
+                         sap.m.MessageToast.show("Employee Deleted");
+                    },
+                    error:function(error)
+                    {
+                        console.log(error)
+                        sap.m.MessageToast.show("Error");
+                    }
+                })
+            },
     });
 });

@@ -37,44 +37,5 @@
 				</ColumnListItem>
 			</items>
 		</Table>
-		<!-- <Table items="{/PLANTS}" id="empExpTable">
-		<headerToolbar>
-			<OverflowToolbar >
-				<content>
-					<Title text="EMPLOYEE EXPERIENCE INFO"></Title>
-					<ToolbarSpacer ></ToolbarSpacer>
-					<Button text="Download" icon="sap-icon://download" press="excelDownload" />
-					<Button text="Upload" icon="sap-icon://upload" press="fileSelection" />
-					<Button text="Download without data" icon="sap-icon://download-from-cloud" press="emptyDownload"></Button>
-				</content>
-			</OverflowToolbar>
-		</headerToolbar>
-			<columns>
-                <Column ><Text text="PLANT ID"/></Column>
-				<Column><Text text="NAME"/></Column>
-				<Column> <Text text="LOCATION"/></Column>
-				<Column><Text text="AVATAR"/></Column>
-				<Column> <Text text="CONTACT"/></Column>
-				<Column><Text text="EMAIL"/></Column>
-				<Column><Text text="HEAD"/></Column>
-				<Column ><Text text="REVENUE"/></Column>
-				<Column><Text text="CUSTOMER COUNT"/></Column>
-			</columns>
-            <items>
-				<ColumnListItem type="Navigation" press="NavToMid">
-                    <cells>
-                        <Text text="{PLANT_ID}"/>
-                        <Text text="{PLANT_NAME}"/>
-                        <Text text="{PLANT_LOC}"/>
-                        <Avatar src="{PLANT_AVATAR}"/>
-                        <Text text="{PLANT_CONT}"/>
-                        <Text text="{PLANT_EMAIL}"/>
-                        <Text text="{PLANT_HEAD}"/>
-                        <Text text="{PLANT_REVENUE}"/>
-                        <Text text="{PLANT_CUST_COUNT}"/>
-                    </cells>
-                </ColumnListItem>
-            </items>
-		</Table> -->
     </Page>
 </mvc:View>
