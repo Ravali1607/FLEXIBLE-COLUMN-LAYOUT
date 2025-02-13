@@ -69,7 +69,6 @@ sap.ui.define([
         fileUpload: function(oEvent){
             var files = oEvent.getParameter("files");
             if(files.length>0){
-                for(var i= 0 ;i<files.length;i++){
                 var reader = new FileReader();
                 reader.onload = function(e){
                     var data = e.target.result;
@@ -81,13 +80,12 @@ sap.ui.define([
                         var xl_row_data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                         tableData = [...tableData,...xl_row_data]
                     });
+                    that.tableData = tableData
                 }
-
                 reader.onerror= function(ex){
                     console.log(ex);
                 }
                 reader.readAsArrayBuffer(files[0]);
-            }
         }
         },
         /*  ----------------------- to upload an excel file ------------------ */
@@ -95,6 +93,7 @@ sap.ui.define([
             var empExp = [];
             var emp = [];
             var plant = [];
+            var tableData = that.tableData;
             tableData.forEach(entry => {
                 if (entry.EmployeeID_EMP_ID) {
                     var startdate = entry.StartDate;
@@ -144,60 +143,138 @@ sap.ui.define([
                     })
                 }
             });
-            that.empExp = empExp;
-            that.emp = emp;
-            that.plant = plant;
-            that.empExp.forEach(function(oEntry){
-                var oModel = that.getOwnerComponent().getModel();
-                oModel.create("/EmployeeExperience",oEntry,{
-                    success: function(response){
-                        sap.m.MessageToast.show("Excel Uploaded successfully!");
-                        console.log("employee experience");
-                    },error(error){
-                        console.log(error);
-                    }      
-                })
-            })
-            that.emp.forEach(function(oEmployee){
-                var oModel = that.getOwnerComponent().getModel();
-                oModel.create("/EMPLOYEE",oEmployee,{
-                    success: function(response){
-                        sap.m.MessageToast.show("Employee details entered successfully!");
-                        console.log("employee");
-                    },else(error){
-                        console.log(error);
+            empExp.forEach(function(oEntry){
+                that.getOwnerComponent().getModel().read("/EmployeeExperience",{
+                    filters : [new sap.ui.model.Filter("EmployeeID_EMP_ID",sap.ui.model.FilterOperator.EQ,oEntry.EmployeeID_EMP_ID)],
+                    success: function(id){
+                        if(id.results.length>0){
+                            var updatePath = "/EmployeeExperience(" + oEntry.EmployeeID_EMP_ID + ")"
+                                // var updatePath = `/EmployeeExperience('${oEntry.EmployeeID_EMP_ID}')`
+                                that.getOwnerComponent().getModel().update(updatePath, oEntry, {
+                                    success: function(response) {
+                                        sap.m.MessageToast.show("Employee updated successfully!");
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        sap.m.MessageToast.show("Error updating employee");
+                                    }
+                                });
+                            }
+                        else{
+                            that.getOwnerComponent().getModel().create("/EmployeeExperience",oEntry,{
+                                success: function(response){
+                                    sap.m.MessageToast.show("Employee Experience information created successfully");
+                                }
+                            })
+                        }
                     }
                 })
             })
-            that.plant.forEach(function(oPlant){
-                var oModel = that.getOwnerComponent().getModel();
-                oModel.create("/PLANTS",oPlant,{
-                    success: function(response){
-                        sap.m.MessageToast.show("Plant details entered successfully");
-                        console.log("plant");
-                    },else(error){
-                        console.log(error);
-                    }
-                })
+            emp.forEach(function(oEmployee){
+                that.getOwnerComponent().getModel().read("/EMPLOYEE",{
+                    filters : [new sap.ui.model.Filter("EMP_ID",sap.ui.model.FilterOperator.EQ,oEmployee.EMP_ID)],
+                    success: function(id){
+                        if(id.results.length>0){
+                            var updatePath = "/EMPLOYEE(" + oEmployee.EMP_ID + ")"
+                                // var updatePath = `/EMPLOYEE('${oEmployee.EMP_ID}')`
+                                that.getOwnerComponent().getModel().update(updatePath, oEmployee, {
+                                    success: function(response) {
+                                        sap.m.MessageToast.show("Employee updated successfully!");
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        sap.m.MessageToast.show("Error updating employee");
+                                    }
+                                });
+                            }
+                        else{
+                            that.getOwnerComponent().getModel().create("/EMPLOYEE",oEmployee,{
+                                success: function(response){
+                                    sap.m.MessageToast.show("Employee information created successfully");
+                                }
+                            })
+                        }
+                        }
+                    })
             })
+            plant.forEach(function(oPlant){
+                that.getOwnerComponent().getModel().read("/PLANTS   ",{
+                    filters : [new sap.ui.model.Filter("PLANT_ID",sap.ui.model.FilterOperator.EQ,oPlant.PLANT_ID)],
+                    success: function(id){
+                        if(id.results.length>0){
+                            var updatePath = "/PLANTS(" + oPlant.PLANT_ID + ")"
+                            //  var updatePath = `/PLANTS('${oPlant.PLANT_ID}')`
+                                that.getOwnerComponent().getModel().update(updatePath, oPlant, {
+                                    success: function(response) {
+                                        sap.m.MessageToast.show("Employee updated successfully!");
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        sap.m.MessageToast.show("Error updating employee");
+                                    }
+                                });
+                            }
+                        else{
+                            that.getOwnerComponent().getModel().create("/PLANTS",oPlant,{
+                                success: function(response){
+                                    sap.m.MessageToast.show("Employee Experience information created successfully");
+                                }
+                            })
+                        }
+                        }
+                    })
+            })
+            // empExp.forEach(function(oEntry){
+            //     var oModel = that.getOwnerComponent().getModel();
+            //     oModel.create("/EmployeeExperience",oEntry,{
+            //         success: function(response){
+            //             sap.m.MessageToast.show("Excel Uploaded successfully!");
+            //             console.log("employee experience");
+            //         },error(error){
+            //             console.log(error);
+            //         }
+            //     })
+            // })
+            // emp.forEach(function(oEmployee){
+            //     var oModel = that.getOwnerComponent().getModel();
+            //     oModel.create("/EMPLOYEE",oEmployee,{
+            //         success: function(response){
+            //             sap.m.MessageToast.show("Employee details entered successfully!");
+            //             console.log("employee");
+            //         },else(error){
+            //             console.log(error);
+            //         }
+            //     })
+            // })
+            // plant.forEach(function(oPlant){
+            //     var oModel = that.getOwnerComponent().getModel();
+            //     oModel.create("/PLANTS",oPlant,{
+            //         success: function(response){
+            //             sap.m.MessageToast.show("Plant details entered successfully");
+            //             console.log("plant");
+            //         },else(error){
+            //             console.log(error);
+            //         }
+            //     })
+            // })
             that.upload.close();
         },
         onDeleteEmp: function(oEvent){
-                var oButton = oEvent.getSource();
-                var oContext = oButton.getBindingContext();
-                var oModel = that.getOwnerComponent().getModel();
-                var sPath = oContext.getPath();
-                oModel.remove(sPath,{
-                    success:function()
-                    {
-                         sap.m.MessageToast.show("Employee Deleted");
-                    },
-                    error:function(error)
-                    {
-                        console.log(error)
-                        sap.m.MessageToast.show("Error");
-                    }
-                })
-            },
+            var oButton = oEvent.getSource();
+            var oContext = oButton.getBindingContext();
+            var oModel = that.getOwnerComponent().getModel();
+            var sPath = oContext.getPath();
+            oModel.remove(sPath,{
+                success:function()
+                {
+                        sap.m.MessageToast.show("Employee Deleted");
+                },
+                error:function(error)
+                {
+                    console.log(error)
+                    sap.m.MessageToast.show("Error");
+                }
+            })
+        },
     });
 });
