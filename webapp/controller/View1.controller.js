@@ -86,7 +86,7 @@ sap.ui.define([
                     console.log(ex);
                 }
                 reader.readAsArrayBuffer(files[0]);
-        }
+            }
         },
         /*  ----------------------- to upload an excel file ------------------ */
         uploadExcel: function(){
@@ -149,17 +149,17 @@ sap.ui.define([
                     success: function(id){
                         if(id.results.length>0){
                             var updatePath = "/EmployeeExperience(" + oEntry.EmployeeID_EMP_ID + ")"
-                                // var updatePath = `/EmployeeExperience('${oEntry.EmployeeID_EMP_ID}')`
-                                that.getOwnerComponent().getModel().update(updatePath, oEntry, {
-                                    success: function(response) {
-                                        sap.m.MessageToast.show("Employee updated successfully!");
-                                    },
-                                    error: function(error) {
-                                        console.log(error);
-                                        sap.m.MessageToast.show("Error updating employee");
-                                    }
-                                });
-                            }
+                            // var updatePath = `/EmployeeExperience('${oEntry.EmployeeID_EMP_ID}')`
+                            that.getOwnerComponent().getModel().update(updatePath, oEntry, {
+                                success: function(response) {
+                                    sap.m.MessageToast.show("Employee updated successfully!");
+                                },
+                                error: function(error) {
+                                    console.log(error);
+                                    sap.m.MessageToast.show("Error updating employee");
+                                }
+                            });
+                        }
                         else{
                             that.getOwnerComponent().getModel().create("/EmployeeExperience",oEntry,{
                                 success: function(response){
@@ -224,39 +224,6 @@ sap.ui.define([
                         }
                     })
             })
-            // empExp.forEach(function(oEntry){
-            //     var oModel = that.getOwnerComponent().getModel();
-            //     oModel.create("/EmployeeExperience",oEntry,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Excel Uploaded successfully!");
-            //             console.log("employee experience");
-            //         },error(error){
-            //             console.log(error);
-            //         }
-            //     })
-            // })
-            // emp.forEach(function(oEmployee){
-            //     var oModel = that.getOwnerComponent().getModel();
-            //     oModel.create("/EMPLOYEE",oEmployee,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Employee details entered successfully!");
-            //             console.log("employee");
-            //         },else(error){
-            //             console.log(error);
-            //         }
-            //     })
-            // })
-            // plant.forEach(function(oPlant){
-            //     var oModel = that.getOwnerComponent().getModel();
-            //     oModel.create("/PLANTS",oPlant,{
-            //         success: function(response){
-            //             sap.m.MessageToast.show("Plant details entered successfully");
-            //             console.log("plant");
-            //         },else(error){
-            //             console.log(error);
-            //         }
-            //     })
-            // })
             that.upload.close();
         },
         onDeleteEmp: function(oEvent){
