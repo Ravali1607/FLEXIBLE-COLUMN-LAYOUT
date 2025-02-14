@@ -12,7 +12,7 @@ sap.ui.define([
         },
         onAfterRendering: function(){
             var oGlobal = that.getOwnerComponent().getModel("globalfclModel");
-            // oGlobal.getProperty("EMP_ID");
+            
         },
         data: function(schannel,sEventId,oData){
             if(oData && oData.EmployeeID_EMP_ID){
@@ -86,10 +86,6 @@ sap.ui.define([
         //         }
         //     })
         //     that.createDialog.close();
-        // },
-        // onFullScreen: function(){
-        //     var oFCL = this.getView().getParent().getParent(); // Get the FlexibleColumnLayout
-        //     oFCL.setLayout(sap.f.LayoutType.MidColumnFullScreen); // Expand second column to full-screen,
         // },
     });
 });

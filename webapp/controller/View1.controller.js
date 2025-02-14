@@ -49,7 +49,7 @@ sap.ui.define([
         emptyDownload: function(){
             var rows= [];
             var headers = 
-            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_ID","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH",
+            ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities","EMP_NAME","EMP_BLODD_GRP","EMP_DESIG","EMP_EMAIL","EMP_CONT","EMP_ADDRESS","EMP_BRANCH",
                 "PLANT_ID","PLANT_NAME","PLANT_LOC","PLANT_CONT","PLANT_EMAIL","PLANT_HEAD","PLANT_REVENUE","PLANT_CUST_COUNT"];
             rows.push(headers);
             // const worksheet = XLSX.utils.json_to_sheet(rows);
@@ -68,66 +68,80 @@ sap.ui.define([
         /* ---------------------  storing the selected excel file data into an array ------------- */
         fileUpload: function(oEvent){
             var files = oEvent.getParameter("files");
+            that.files = files;
             if(files.length>0){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    var data = e.target.result;
-                    var workbook = XLSX.read(data,{
-                        type : "array"
-                    });
+                for(var i=0; i<files.length; i++){
+                    var oFiles = files[i];
+                    var reader = new FileReader();
                     var tableData = [];
-                    workbook.SheetNames.forEach(sheetName => {
-                        var xl_row_data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                        tableData = [...tableData,...xl_row_data]
-                    });
-                    that.tableData = tableData
+                    reader.onload = function(e){
+                        var data = e.target.result;
+                        var workbook = XLSX.read(data,{
+                            type : "array"
+                        });
+                        
+                        workbook.SheetNames.forEach(sheetName => {
+                            var xl_row_data = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                            tableData = [...tableData,...xl_row_data]
+                        });
+                        that.tableData = tableData
+                    }
+                    reader.onerror= function(ex){
+                        console.log(ex);
+                    }
+                    reader.readAsArrayBuffer(oFiles);
                 }
-                reader.onerror= function(ex){
-                    console.log(ex);
-                }
-                reader.readAsArrayBuffer(files[0]);
             }
         },
         /*  ----------------------- to upload an excel file ------------------ */
         uploadExcel: function(){
+            var tableData = that.tableData;
             var empExp = [];
             var emp = [];
             var plant = [];
-            var tableData = that.tableData;
+            // var tableData = that.tableData[i];
             tableData.forEach(entry => {
                 if (entry.EmployeeID_EMP_ID) {
-                    var startdate = entry.StartDate;
-                    startdate = new Date((startdate - 25569) * 86400 * 1000);
-                    var year1 = startdate.getFullYear();
-                    var month1 = ("0" + (startdate.getMonth() + 1)).slice(-2); 
-                    var day1 = ("0" + startdate.getDate()).slice(-2);
-                    var formattedStartDate = `${year1}-${month1}-${day1}`;
-                    var enddate = entry.EndDate;
-                    enddate = new Date((enddate - 25569) * 86400 * 1000);
-                    var year2 = enddate.getFullYear();
-                    var month2 = ("0" + (enddate.getMonth() + 1)).slice(-2); 
-                    var day2 = ("0" + enddate.getDate()).slice(-2);
-                    var formattedEndDate = `${year2}-${month2}-${day2}`;
-                    empExp.push({
-                        EmployeeID_EMP_ID: entry.EmployeeID_EMP_ID,
-                        CompanyName: entry.CompanyName,
-                        Role: entry.Role,
-                        StartDate: formattedStartDate,
-                        EndDate: formattedEndDate,
-                        Responsibilities: entry.Responsibilities
-                    });
+                    if(entry.EmployeeID_EMP_ID && entry.CompanyName && entry.Role && entry.StartDate && entry.EndDate && entry.Responsibilities){
+                        var startdate = entry.StartDate;
+                        startdate = new Date((startdate - 25569) * 86400 * 1000);
+                        var year1 = startdate.getFullYear();
+                        var month1 = ("0" + (startdate.getMonth() + 1)).slice(-2); 
+                        var day1 = ("0" + startdate.getDate()).slice(-2);
+                        var formattedStartDate = `${year1}-${month1}-${day1}`;
+                        var enddate = entry.EndDate;
+                        enddate = new Date((enddate - 25569) * 86400 * 1000);
+                        var year2 = enddate.getFullYear();
+                        var month2 = ("0" + (enddate.getMonth() + 1)).slice(-2); 
+                        var day2 = ("0" + enddate.getDate()).slice(-2);
+                        var formattedEndDate = `${year2}-${month2}-${day2}`;
+                        empExp.push({
+                            EmployeeID_EMP_ID: entry.EmployeeID_EMP_ID,
+                            CompanyName: entry.CompanyName,
+                            Role: entry.Role,
+                            StartDate: formattedStartDate,
+                            EndDate: formattedEndDate,
+                            Responsibilities: entry.Responsibilities
+                        });
+                    }else{
+                        sap.m.MessageToast.show("enter valid employee experience details ",EmployeeID_EMP_ID);
+                    }
                 }
-                if (entry.EMP_ID) {
-                    emp.push({
-                        EMP_ID: entry.EMP_ID,
-                        EMP_NAME: entry.EMP_NAME,
-                        EMP_BLODD_GRP: entry.EMP_BLODD_GRP,
-                        EMP_DESIG: entry.EMP_DESIG,
-                        EMP_EMAIL: entry.EMP_EMAIL,
-                        EMP_CONT: entry.EMP_CONT + "",
-                        EMP_ADDRESS: entry.EMP_ADDRESS,
-                        EMP_BRANCH: entry.EMP_BRANCH
-                    });
+                if (entry.EmployeeID_EMP_ID) {
+                    if(entry.EmployeeID_EMP_ID && entry.EMP_NAME && entry.EMP_BLODD_GRP && entry.EMP_DESIG && entry.EMP_EMAIL && entry.EMP_CONT && entry.EMP_ADDRESS && entry.EMP_BRANCH){
+                        emp.push({
+                            EMP_ID: entry.EmployeeID_EMP_ID,
+                            EMP_NAME: entry.EMP_NAME,
+                            EMP_BLODD_GRP: entry.EMP_BLODD_GRP,
+                            EMP_DESIG: entry.EMP_DESIG,
+                            EMP_EMAIL: entry.EMP_EMAIL,
+                            EMP_CONT: entry.EMP_CONT + "",
+                            EMP_ADDRESS: entry.EMP_ADDRESS,
+                            EMP_BRANCH: entry.EMP_BRANCH
+                        });
+                    }else{
+                        sap.m.MessageToast.show("Enter all the fields in ",EmployeeID_EMP_ID);
+                    }
                 }
                 if(entry.PLANT_ID){
                     plant.push({
@@ -176,17 +190,17 @@ sap.ui.define([
                     success: function(id){
                         if(id.results.length>0){
                             var updatePath = "/EMPLOYEE(" + oEmployee.EMP_ID + ")"
-                                // var updatePath = `/EMPLOYEE('${oEmployee.EMP_ID}')`
-                                that.getOwnerComponent().getModel().update(updatePath, oEmployee, {
-                                    success: function(response) {
-                                        sap.m.MessageToast.show("Employee updated successfully!");
-                                    },
-                                    error: function(error) {
-                                        console.log(error);
-                                        sap.m.MessageToast.show("Error updating employee");
-                                    }
-                                });
-                            }
+                            // var updatePath = `/EMPLOYEE('${oEmployee.EMP_ID}')`
+                            that.getOwnerComponent().getModel().update(updatePath, oEmployee, {
+                                success: function(response) {
+                                    sap.m.MessageToast.show("Employee updated successfully!");
+                                },
+                                error: function(error) {
+                                    console.log(error);
+                                    sap.m.MessageToast.show("Error updating employee");
+                                }
+                            });
+                        }
                         else{
                             that.getOwnerComponent().getModel().create("/EMPLOYEE",oEmployee,{
                                 success: function(response){
@@ -194,8 +208,8 @@ sap.ui.define([
                                 }
                             })
                         }
-                        }
-                    })
+                    }
+                })
             })
             plant.forEach(function(oPlant){
                 that.getOwnerComponent().getModel().read("/PLANTS   ",{
@@ -203,26 +217,25 @@ sap.ui.define([
                     success: function(id){
                         if(id.results.length>0){
                             var updatePath = "/PLANTS(" + oPlant.PLANT_ID + ")"
-                            //  var updatePath = `/PLANTS('${oPlant.PLANT_ID}')`
-                                that.getOwnerComponent().getModel().update(updatePath, oPlant, {
-                                    success: function(response) {
-                                        sap.m.MessageToast.show("Employee updated successfully!");
-                                    },
-                                    error: function(error) {
-                                        console.log(error);
-                                        sap.m.MessageToast.show("Error updating employee");
-                                    }
-                                });
-                            }
-                        else{
+                            // var updatePath = `/PLANTS('${oPlant.PLANT_ID}')`
+                            that.getOwnerComponent().getModel().update(updatePath, oPlant, {
+                                success: function(response) {
+                                    sap.m.MessageToast.show("Employee updated successfully!");
+                                },
+                                error: function(error) {
+                                    console.log(error);
+                                    sap.m.MessageToast.show("Error updating employee");
+                                }
+                            });
+                        }else{
                             that.getOwnerComponent().getModel().create("/PLANTS",oPlant,{
                                 success: function(response){
                                     sap.m.MessageToast.show("Employee Experience information created successfully");
                                 }
                             })
                         }
-                        }
-                    })
+                    }
+                })
             })
             that.upload.close();
         },
