@@ -58,9 +58,11 @@ sap.ui.define([
                 oButton.setIcon("sap-icon://exit-full-screen"); // Update button text
             }
         },
-        forNextPage: function(){
-            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);    
-            oRouter.navTo("View4");
+        aboutPlant: function(oEvent){
+            var oId = oEvent.getSource().getBindingContext().getProperty("PLANT_ID");
+            that.getOwnerComponent().getRouter().navTo("View4",{
+                oPlantId : oId
+            });
         },
         // openFragment: function(){
         //     if(!that.plantDialog){

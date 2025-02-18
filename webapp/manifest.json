@@ -101,7 +101,7 @@
         },
         {
           "name": "View4",
-          "pattern": "View4",
+          "pattern": "View4/{oPlantId}",
           "target": [
             "TargetView4"
           ]

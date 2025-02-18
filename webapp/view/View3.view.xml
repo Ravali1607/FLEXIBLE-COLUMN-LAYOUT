@@ -4,15 +4,17 @@
 			<Button id="btnFullScreen" icon="sap-icon://full-screen" press=".onToggleFullScreen"/>
             <Button icon="sap-icon://decline" press="onClose"></Button>
         </headerContent>
-		<!-- <List id="plantData" items="{/plant}">
+		<List id="plantData" items="{/plant}" >
 			<StandardListItem title="{PLANT_ID}"
 			description="{PLANT_NAME}"
+			press="aboutPlant"
+			type="Navigation"
 			>
 			</StandardListItem>
-		</List> -->
+		</List>
 		<!-- <Button text="Add" press="openFragment"></Button> -->
 		
-		<Table id="plantData" items="{/plant}">
+		<!-- <Table id="plantData" items="{/plant}">
 			<columns>
 				<Column ><Label text="Plant ID"></Label></Column>
 				<Column ><Label text="Name"></Label></Column>
@@ -25,7 +27,7 @@
 				<Column ><Label text="Customer Count"></Label></Column>
 			</columns>
 			<items>
-				<ColumnListItem >
+				<ColumnListItem type="Navigation" press="aboutPlant">
 					<Text text="{PLANT_ID}"></Text>
 					<Text text="{PLANT_NAME}"></Text>
 					<Text text="{PLANT_LOC}"></Text>
@@ -42,27 +44,6 @@
 		<Toolbar>
 			<Button text="Navigation to Next Page" press="forNextPage"></Button>
 			</Toolbar>
-		</footer>
-		<!-- <form:SimpleForm id="plantData" >
-			<form:content>
-				<Label text="ID" />
-				<Text text="{plant>PLANT_ID}"/>
-				<Label text="NAME" />
-				<Text text="{plant>PLANT_NAME}"/>
-				<Label text="LOCATION" />
-				<Text text="{plant>PLANT_LOC}"/>
-				<Label text="CONTACT" />
-				<Text text="{plant>PLANT_CONT}"/>
-				<Label text="EMAIL" />
-				<Text text="{plant>PLANT_EMAIL}"/>
-				<Label text="HEAD OF THE PLANT" />
-				<Text text="{plant>PLANT_HEAD}"/>
-				<Label text="REVENUE" />
-				<Text text="{plant>PLANT_REVENUE}"/>
-				<Label text="CUSTOMER COUNT" />
-				<Text text="{plant>PLANT_CUST_COUNT}"/>
-			</form:content>
-		</form:SimpleForm> -->
-		
+		</footer> -->
 	</Page>
 </mvc:View>

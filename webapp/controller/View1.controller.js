@@ -28,13 +28,12 @@ sap.ui.define([
             if (date) {
                     var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "YYYY-MM-dd"});
                     return oDateFormat.format(new Date(date));
-            }  
+            } 
         },
         /*  -----------------  Downloading an excel file with Data in view 1 -----------------*/
         excelDownload: function(){
             var rows = [];
             var table = that.getView().byId("empExpTable").getItems();
-            var table1 = that.getView().byId("empForm").getItems();
             table.forEach(val => {
                 var data = val.getBindingContext().getObject();             // to get values in the each row
                 delete data['__metadata'];                                  // to delete the column metadata which is not required for us
@@ -68,7 +67,6 @@ sap.ui.define([
         /* ---------------------  storing the selected excel file data into an array ------------- */
         fileUpload: function(oEvent){
             var files = oEvent.getParameter("files");
-            that.files = files;
             if(files.length>0){
                 for(var i=0; i<files.length; i++){
                     var oFiles = files[i];
@@ -124,7 +122,7 @@ sap.ui.define([
                             Responsibilities: entry.Responsibilities
                         });
                     }else{
-                        sap.m.MessageToast.show("enter valid employee experience details ",EmployeeID_EMP_ID);
+                        sap.m.MessageToast.show("enter valid employee experience details ");
                     }
                 }
                 if (entry.EmployeeID_EMP_ID) {
@@ -140,7 +138,7 @@ sap.ui.define([
                             EMP_BRANCH: entry.EMP_BRANCH
                         });
                     }else{
-                        sap.m.MessageToast.show("Enter all the fields in ",EmployeeID_EMP_ID);
+                        sap.m.MessageToast.show("Enter all the fields in ");
                     }
                 }
                 if(entry.PLANT_ID){
@@ -162,8 +160,8 @@ sap.ui.define([
                     filters : [new sap.ui.model.Filter("EmployeeID_EMP_ID",sap.ui.model.FilterOperator.EQ,oEntry.EmployeeID_EMP_ID)],
                     success: function(id){
                         if(id.results.length>0){
-                            var updatePath = "/EmployeeExperience(" + oEntry.EmployeeID_EMP_ID + ")"
-                            // var updatePath = `/EmployeeExperience('${oEntry.EmployeeID_EMP_ID}')`
+                            // var updatePath = "/EmployeeExperience(" + oEntry.EmployeeID_EMP_ID + ")"
+                            var updatePath = `/EmployeeExperience('${id.results.ID}')`
                             that.getOwnerComponent().getModel().update(updatePath, oEntry, {
                                 success: function(response) {
                                     sap.m.MessageToast.show("Employee updated successfully!");
@@ -189,8 +187,8 @@ sap.ui.define([
                     filters : [new sap.ui.model.Filter("EMP_ID",sap.ui.model.FilterOperator.EQ,oEmployee.EMP_ID)],
                     success: function(id){
                         if(id.results.length>0){
-                            var updatePath = "/EMPLOYEE(" + oEmployee.EMP_ID + ")"
-                            // var updatePath = `/EMPLOYEE('${oEmployee.EMP_ID}')`
+                            // var updatePath = "/EMPLOYEE(" + oEmployee.EMP_ID + ")"
+                            var updatePath = `/EMPLOYEE('${oEmployee.EMP_ID}')`
                             that.getOwnerComponent().getModel().update(updatePath, oEmployee, {
                                 success: function(response) {
                                     sap.m.MessageToast.show("Employee updated successfully!");
@@ -216,8 +214,8 @@ sap.ui.define([
                     filters : [new sap.ui.model.Filter("PLANT_ID",sap.ui.model.FilterOperator.EQ,oPlant.PLANT_ID)],
                     success: function(id){
                         if(id.results.length>0){
-                            var updatePath = "/PLANTS(" + oPlant.PLANT_ID + ")"
-                            // var updatePath = `/PLANTS('${oPlant.PLANT_ID}')`
+                            // var updatePath = "/PLANTS(" + oPlant.PLANT_ID + ")"
+                            var updatePath = `/PLANTS('${id.results.PLANT_ID}')`
                             that.getOwnerComponent().getModel().update(updatePath, oPlant, {
                                 success: function(response) {
                                     sap.m.MessageToast.show("Employee updated successfully!");
