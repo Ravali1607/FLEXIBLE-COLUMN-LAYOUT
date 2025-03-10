@@ -31,6 +31,8 @@ sap.ui.define([
             })
         },
         onNavBack: function(){
+            window.history.go(-1);
+            that.getOwnerComponent().getRouter().navTo("View1");
             // var oHistory = History.getInstance();
             // var sPreviousHash = oHistory.getPreviousHash();
             // if (sPreviousHash !== undefined) {
@@ -39,8 +41,6 @@ sap.ui.define([
             //     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             //     oRouter.navTo("View1", {}, true);
             // }
-            window.history.go(-1);
-            that.getOwnerComponent().getRouter().navTo("View1");
                 // var oApp = that.getOwnerComponent().getAggregation("rootControl");
                 // var oFCL = oApp.byId("fcl"); // Get the FCL instance
     
@@ -48,7 +48,7 @@ sap.ui.define([
                 //     oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded); // Restore the three-column view
                 // }
     
-                // // Navigate to View1 and ensure the layout is restored
+                // Navigate to View1 and ensure the layout is restored
                 // that.getOwnerComponent().getRouter().navTo("View1");
         },
     });

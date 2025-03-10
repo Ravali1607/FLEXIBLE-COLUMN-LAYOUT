@@ -11,8 +11,7 @@ sap.ui.define([
             this.oEventBus.subscribe("flexible","setView2",this.data,this);
         },
         onAfterRendering: function(){
-            var oGlobal = that.getOwnerComponent().getModel("globalfclModel");
-            
+            // var oGlobal = that.getOwnerComponent().getModel("globalfclModel");
         },
         data: function(schannel,sEventId,oData){
             if(oData && oData.EmployeeID_EMP_ID){
@@ -48,16 +47,16 @@ sap.ui.define([
             this.oEventBus.publish("flexible","setView1");
         },
         onToggleFullScreen: function () {
-            var oFCL = this.getView().getParent().getParent(); // Get FlexibleColumnLayout
-            var oButton = this.getView().byId("btnFullScreen1"); // Get button reference
-            var sCurrentLayout = oFCL.getLayout(); // Get current layout
+            var oFCL = this.getView().getParent().getParent();                          // Get FlexibleColumnLayout
+            var oButton = this.getView().byId("btnFullScreen1");                        // Get button reference
+            var sCurrentLayout = oFCL.getLayout();                                      // Get current layout
         
             if (sCurrentLayout === sap.f.LayoutType.MidColumnFullScreen) {
-                oFCL.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded); // Restore layout
-                oButton.setIcon("sap-icon://full-screen"); // Update icon
+                oFCL.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);                 // Restore layout
+                oButton.setIcon("sap-icon://full-screen");                              // Update icon
             } else {
-                oFCL.setLayout(sap.f.LayoutType.MidColumnFullScreen); // Expand second column
-                oButton.setIcon("sap-icon://exit-full-screen"); // Update icon
+                oFCL.setLayout(sap.f.LayoutType.MidColumnFullScreen);                   // Expand second column
+                oButton.setIcon("sap-icon://exit-full-screen");                         // Update icon
             }
         },
         // onCreate: function(){

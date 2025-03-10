@@ -15,7 +15,6 @@ sap.ui.define([
         },
         onAfterRendering(){
             var oModel = that.getOwnerComponent().getModel("globalfclModel");
-
         },
         /*  -------------    Navigate to master page to detail page   ---------------- */
         NavToMid: function(oEvent){
@@ -35,14 +34,14 @@ sap.ui.define([
             var rows = [];
             var table = that.getView().byId("empExpTable").getItems();
             table.forEach(val => {
-                var data = val.getBindingContext().getObject();             // to get values in the each row
-                delete data['__metadata'];                                  // to delete the column metadata which is not required for us
-                rows.push(data);                                            // push the data into the array
+                var data = val.getBindingContext().getObject();                     // to get values in the each row
+                delete data['__metadata'];                                          // to delete the column metadata which is not required for us
+                rows.push(data);                                                    // push the data into the array
             })
-            const worksheet = XLSX.utils.json_to_sheet(rows);               //store the array data into a sheet
-            const workbook = XLSX.utils.book_new();                         //creating a excel workbook
-            XLSX.utils.book_append_sheet(workbook,worksheet,"EMPLOYEE INFO");   //storing the worksheet data into workbook with the given name
-            XLSX.writeFile(workbook,"EMPLOYEE.xlsx");                       //download the file with the given name with extension
+            const worksheet = XLSX.utils.json_to_sheet(rows);                       //store the array data into a sheet
+            const workbook = XLSX.utils.book_new();                                 //creating a excel workbook
+            XLSX.utils.book_append_sheet(workbook,worksheet,"EMPLOYEE INFO");       //storing the worksheet data into workbook with the given name
+            XLSX.writeFile(workbook,"EMPLOYEE.xlsx");                               //download the file with the given name with extension
         },
         /* ---------------------- Downloading an excel file which contains the headers of three views ------------------------*/
         emptyDownload: function(){
@@ -157,11 +156,11 @@ sap.ui.define([
             });
             empExp.forEach(function(oEntry){
                 that.getOwnerComponent().getModel().read("/EmployeeExperience",{
-                    filters : [new sap.ui.model.Filter("EmployeeID_EMP_ID",sap.ui.model.FilterOperator.EQ,oEntry.EmployeeID_EMP_ID)],
+                    filters : [new sap.ui.model.Filter("ID",sap.ui.model.FilterOperator.EQ,oEntry.ID)],
                     success: function(id){
                         if(id.results.length>0){
                             // var updatePath = "/EmployeeExperience(" + oEntry.EmployeeID_EMP_ID + ")"
-                            var updatePath = `/EmployeeExperience('${id.results.ID}')`
+                            var updatePath = `/EmployeeExperience('${id.ID}')`
                             that.getOwnerComponent().getModel().update(updatePath, oEntry, {
                                 success: function(response) {
                                     sap.m.MessageToast.show("Employee updated successfully!");
@@ -210,7 +209,7 @@ sap.ui.define([
                 })
             })
             plant.forEach(function(oPlant){
-                that.getOwnerComponent().getModel().read("/PLANTS   ",{
+                that.getOwnerComponent().getModel().read("/PLANTS",{
                     filters : [new sap.ui.model.Filter("PLANT_ID",sap.ui.model.FilterOperator.EQ,oPlant.PLANT_ID)],
                     success: function(id){
                         if(id.results.length>0){
@@ -245,7 +244,7 @@ sap.ui.define([
             oModel.remove(sPath,{
                 success:function()
                 {
-                        sap.m.MessageToast.show("Employee Deleted");
+                    sap.m.MessageToast.show("Employee Deleted");
                 },
                 error:function(error)
                 {

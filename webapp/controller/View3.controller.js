@@ -35,16 +35,6 @@ sap.ui.define([
         onClose: function(){
             this.oEventBus.publish("flexible","setView2");
         },
-        // onFullScreen: function(){
-        //     var viewId = that.byId("page3");
-        //     var oButton = that.byId("fullScreenButton");
-        //     oFlexible.setLayout(fioriLibrary.LayoutType.EndColFullScreen);
-        // },
-        // onFullScreen: function () {
-        //     var oFCL = this.getView().getParent().getParent(); // Get the FlexibleColumnLayout
-        //     oFCL.setLayout(sap.f.LayoutType.EndColumnFullScreen); // Expand third column to full-screen
-
-        // }
         onToggleFullScreen: function () {
             var oFCL = this.getView().getParent().getParent(); // Get FlexibleColumnLayout
             var oButton = this.getView().byId("btnFullScreen"); // Get button reference
