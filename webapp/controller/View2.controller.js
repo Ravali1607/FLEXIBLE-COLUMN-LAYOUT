@@ -10,9 +10,7 @@ sap.ui.define([
             this.oEventBus = this.getOwnerComponent().getEventBus();
             this.oEventBus.subscribe("flexible","setView2",this.data,this);
         },
-        onAfterRendering: function(){
-            // var oGlobal = that.getOwnerComponent().getModel("globalfclModel");
-        },
+
         data: function(schannel,sEventId,oData){
             if(oData && oData.EmployeeID_EMP_ID){
                 var oItem = oData.EmployeeID_EMP_ID;
@@ -33,10 +31,12 @@ sap.ui.define([
                 })
             }
         },
+
         NavToFirst: function(){
             sap.m.MessageToast.show("Button Clicked");
             this.oEventBus.publish("flexible","setView1");
         },
+
         NavToEnd: function(oEvent){
             sap.m.MessageToast.show("End Page Button Clicked");
             var oTable = that.byId("empForm");

@@ -2,15 +2,22 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page1">
-        <Table items="{/EmployeeExperience}" id="empExpTable">
+        <Table items="{
+				path: '/EmployeeExperience'
+				
+				}" id="empExpTable">
 		<headerToolbar>
 			<OverflowToolbar >
 				<content>
-					<Title text="EMPLOYEE EXPERIENCE INFO"></Title>
+					<Title text="EMPLOYEE EXPERIENCE INFO" />
 					<ToolbarSpacer ></ToolbarSpacer>
 					<Button text="Download" icon="sap-icon://download" press="excelDownload" />
 					<Button text="Upload" icon="sap-icon://upload" press="fileSelection" />
-					<Button text="Download without data" icon="sap-icon://download-from-cloud" press="emptyDownload"></Button>
+					<Button text="Download without data" icon="sap-icon://download-from-cloud" press="emptyDownload" />
+					<Button text="Download " icon="sap-icon://pdf-attachment" press="pdfDownload" />
+					<!-- <Text text="{path : '/currentDate', type: 'sap.ui.model.type.DateTime',formatOptions: {
+						pattern: 'yyyy-MM-dd HH:mm:ss'}
+					}" /> -->
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -26,12 +33,12 @@
 			<items>
 				<ColumnListItem type="Navigation" press="NavToMid">
 					<cells>
-						<Text text="{ID}"></Text>
-						<Text text="{CompanyName}"></Text>
-						<Text text="{Role}"></Text>
-						<Text text="{path : 'StartDate', formatter : '.dateFormat'}"></Text>
-						<Text text="{path : 'EndDate', formatter : '.dateFormat'}"></Text>
-						<Text text="{Responsibilities}"></Text>
+						<Text text="{ID}" />
+						<Text text="{CompanyName}" />
+						<Text text="{Role}" />
+						<Text text="{path : 'StartDate', formatter : '.dateFormat'}" />
+						<Text text="{path : 'EndDate', formatter : '.dateFormat'}" />
+						<Text text="{Responsibilities}" />
 						<!-- <Button icon="sap-icon://delete" press="onDeleteEmp"></Button> -->
 					</cells>
 				</ColumnListItem>

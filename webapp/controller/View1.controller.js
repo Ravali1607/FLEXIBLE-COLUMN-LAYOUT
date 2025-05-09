@@ -4,21 +4,39 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/ui/model/Sorter",
     "sap/ui/core/Fragment",
-    "sap/ui/export/Spreadsheet"
-], (Controller,Filter,FilterOperator,Sorter,Fragment,Spreadsheet) => {
+    "sap/ui/export/Spreadsheet",
+    "sap/m/MessageToast"
+], (Controller,Filter,FilterOperator,Sorter,Fragment,Spreadsheet,MessageToast) => {
     "use strict";
     var that;
     return Controller.extend("flexiblecolumnlayout.controller.View1", {
         onInit() {
             that=this;
             that.oEventBus = that.getOwnerComponent().getEventBus();
+            var jQueryScript = document.createElement('script');
+ 
+            jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js');
+ 
+            document.head.appendChild(jQueryScript);
+
+            var jQueryScript1 = document.createElement('script');
+            jQueryScript1.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js');
+            document.head.appendChild(jQueryScript1);
+
+            var jQueryScript2 = document.createElement('script');
+            jQueryScript2.setAttribute('src','https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js');
+            document.head.appendChild(jQueryScript2);
+
+            // that.getView().setModel(new sap.ui.model.json.JSONModel({
+            //     currentDate : new Date()
+            // }))
         },
         onAfterRendering(){
             var oModel = that.getOwnerComponent().getModel("globalfclModel");
         },
         /*  -------------    Navigate to master page to detail page   ---------------- */
         NavToMid: function(oEvent){
-            var oModel = that.getOwnerComponent().getModel("globalfclModel");
+            // var oModel = that.getOwnerComponent().getModel("globalfclModel");
             var oItem = oEvent.getSource().getBindingContext().getProperty();
             that.oEventBus.publish("flexible","setView2",oItem);
         },
@@ -29,19 +47,41 @@ sap.ui.define([
                     return oDateFormat.format(new Date(date));
             } 
         },
-        /*  -----------------  Downloading an excel file with Data in view 1 -----------------*/
-        excelDownload: function(){
+        /*  -----------------  Downloading an excel file with Data in view 1 -----------------  */
+        // excelDownload: function(){
+        //     var rows = [];
+        //     var table = that.getView().byId("empExpTable").getItems();
+        //     table.forEach(val => {
+        //         var data = val.getBindingContext().getObject();                     // to get values in the each row
+        //         delete data['__metadata'];                                          // to delete the column metadata which is not required for us
+        //         rows.push(data);                                                    // push the data into the array
+        //     })
+        //     const worksheet = XLSX.utils.json_to_sheet(rows);                       //store the array data into a sheet
+        //     const workbook = XLSX.utils.book_new();                                 //creating a excel workbook
+        //     XLSX.utils.book_append_sheet(workbook,worksheet,"EMPLOYEE INFO");       //storing the worksheet data into workbook with the given name
+        //     XLSX.writeFile(workbook,"EMPLOYEE.xlsx");                               //download the file with the given name with extension
+        // },
+        /*   --------------------  Combining the columns when downloading an excel file with Data ------------------ */
+        excelDownload: function() {
             var rows = [];
             var table = that.getView().byId("empExpTable").getItems();
             table.forEach(val => {
-                var data = val.getBindingContext().getObject();                     // to get values in the each row
-                delete data['__metadata'];                                          // to delete the column metadata which is not required for us
-                rows.push(data);                                                    // push the data into the array
+                var data = val.getBindingContext().getObject();
+                delete data['__metadata'];
+                if (data.Role && data.CompanyName) {
+                    data.Designation = `${data.CompanyName} - ${data.Role}`;
+                    delete data.Role;                     //delete data['ID'];
+                    delete data.CompanyName;            //delete data['CompanyName'];
+                }
+                // data.ID = data.ID + " " + data.CompanyName;
+                
+                rows.push(data);
             })
-            const worksheet = XLSX.utils.json_to_sheet(rows);                       //store the array data into a sheet
-            const workbook = XLSX.utils.book_new();                                 //creating a excel workbook
-            XLSX.utils.book_append_sheet(workbook,worksheet,"EMPLOYEE INFO");       //storing the worksheet data into workbook with the given name
-            XLSX.writeFile(workbook,"EMPLOYEE.xlsx");                               //download the file with the given name with extension
+            
+            const worksheet = XLSX.utils.json_to_sheet(rows);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "EMPLOYEE INFO");
+            XLSX.writeFile(workbook, "EMPLOYEE.xlsx");
         },
         /* ---------------------- Downloading an excel file which contains the headers of three views ------------------------*/
         emptyDownload: function(){
@@ -57,7 +97,7 @@ sap.ui.define([
             XLSX.writeFile(oWorkbook, "EmployeeData.xlsx");
         },
         /*  ------------------- for opening the fragment to upload file --------------*/
-        fileSelection: function(){
+        fileSelection: function(oEvent){
             if(!that.upload){
                 that.upload = sap.ui.xmlfragment("flexiblecolumnlayout.fragments.upload",that);
             }
@@ -90,7 +130,7 @@ sap.ui.define([
                 }
             }
         },
-        /*  ----------------------- to upload an excel file ------------------ */
+        /*  ----------------------- to upload an excel file --------------------------- */
         uploadExcel: function(){
             var tableData = that.tableData;
             var empExp = [];
@@ -137,7 +177,7 @@ sap.ui.define([
                             EMP_BRANCH: entry.EMP_BRANCH
                         });
                     }else{
-                        sap.m.MessageToast.show("Enter all the fields in ");
+                        sap.m.MessageToast.show("Enter all the fields ");
                     }
                 }
                 if(entry.PLANT_ID){
@@ -253,5 +293,187 @@ sap.ui.define([
                 }
             })
         },
+   
+        // pdfDownload: function() {
+        //     var oTable = this.getView().byId("empExpTable");
+        //     var oColumns = oTable.getColumns();
+        //     var oItems = oTable.getItems();
+        //     var tableBody = [];
+        //     var headerRow = [];
+        //     var columnWidths = ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'];
+            
+        //     oColumns.forEach(function(oColumn) {
+        //         headerRow.push({ text: oColumn.getHeader().getText(), style: 'tableHeader' });
+        //     });
+        //     tableBody.push(headerRow);
+            
+        //     oItems.forEach(function(oItem) {
+
+        //         var dataRow = [];
+        //         var oCells = oItem.getCells();
+        //         oCells.forEach(function(oCell) {
+        //             dataRow.push({ text: oCell.getText(), style: 'tableContent' });
+        //         });
+        //         tableBody.push(dataRow);
+        //     });
+            
+        //     var docDefinition = {
+        //         content: [
+        //             { text: 'Employee Experience Report', style: 'header' },
+        //             { text: '\n' }, 
+        //             {
+        //                 table: {
+        //                     headerRows: 1,
+        //                     // widths: Array(oColumns.length).fill('*'),
+        //                     widths: columnWidths,
+        //                     body: tableBody
+        //                 },
+        //             }
+        //         ],
+        //         styles: {
+        //             header: {
+        //                 fontSize: 14,
+        //                 bold: true,
+        //                 alignment: 'center',
+        //                 margin: [0, 0, 0, 10]
+        //             },
+        //             tableHeader: {
+        //                 bold: true,
+        //                 fontSize: 9,
+        //                 color: 'black'
+        //             },
+        //             tableContent: {
+        //                 fontSize: 8 
+        //             }
+        //         },
+        //         pageSize: 'A4',
+        //         pageOrientation: 'potrait'
+        //     };
+        //     pdfMake.createPdf(docDefinition).download('Employee_Experience.pdf');
+        //     sap.m.MessageToast.show("PDF Downloaded Successfully!");
+        // }
+        pdfDownload: function() {
+            var oTable = this.getView().byId("empExpTable");
+            var oColumns = oTable.getColumns();
+            var oItems = oTable.getItems();
+            var tableBody = [];
+            var columnWidths = ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'];
+            var aData = [];
+            var iRoleColumnIndex = 2; 
+            oItems.forEach(function(oItem) {
+                var oCells = oItem.getCells();
+                var rowData = {
+                    role: oCells[iRoleColumnIndex].getText(),
+                    cells: []
+                };
+                oCells.forEach(function(oCell) {
+                    rowData.cells.push(oCell.getText());
+                });
+                aData.push(rowData);
+            });
+            aData.sort(function(a, b) {
+                return a.role.localeCompare(b.role); 
+                // return b.role.localeCompare(a.role); // Descending
+            });
+            var headerRow = oColumns.map(function(oColumn) {
+                return { text: oColumn.getHeader().getText(), style: 'tableHeader' };
+            });
+            tableBody.push(headerRow);
+            aData.forEach(function(oRow) {
+                var dataRow = oRow.cells.map(function(sCellText) {
+                    return { text: sCellText, style: 'tableContent' };
+                });
+                tableBody.push(dataRow);
+            });
+            var docDefinition = {
+                content: [
+                    { text: 'Employee Experience Report', style: 'header' },
+                    { text: '\n' }, 
+                    { 
+                        table: {
+                            headerRows: 1,
+                            widths: columnWidths,
+                            body: tableBody
+                        }
+                    }
+                ],
+                styles: {
+                    header: {
+                        fontSize: 14,
+                        bold: true,
+                        alignment: 'center',
+                        margin: [0, 0, 0, 10]
+                    },
+                    tableHeader: {
+                        bold: true,
+                        fontSize: 9,
+                        color: 'black'
+                    },
+                    tableContent: {
+                        fontSize: 8 
+                    }
+                },
+                pageSize: 'A4',
+                pageOrientation: 'portrait'
+            };
+            pdfMake.createPdf(docDefinition).download('Employee_Experience.pdf');
+            sap.m.MessageToast.show("PDF Downloaded Successfully!");
+        }
     });
 });
+// <!---------------- layout for the table in the pdf -----------------!>
+// layout: {
+//     hLineWidth: function(i, node) { return 0.5; },
+//     vLineWidth: function(i, node) { return 0.5; },
+//     hLineColor: function(i, node) { return '#aaa'; },
+//     vLineColor: function(i, node) { return '#aaa'; },
+//     paddingLeft: function(i, node) { return 4; },
+//     paddingRight: function(i, node) { return 4; },
+//     paddingTop: function(i, node) { return 2; },
+//     paddingBottom: function(i, node) { return 2; }
+// }
+// pdfDownload: function(){
+//     if (!window.pdfMake) {
+//         sap.m.MessageToast.show("pdfMake library is not loaded!");
+//         return;
+//       }
+//     var oTable = that.getView().byId("empExpTable");
+//     var oColumns = oTable.getColumns();
+//     var oItems = oTable.getItems();
+
+//     var pdfContent = "Table Content:\n\n";
+//     oColumns.forEach(function(oColumn){
+//         pdfContent += oColumn.mAggregations.header.getProperty("text") + "\t";
+//     });
+//     pdfContent += "\n";
+
+//     oItems.forEach(function(oItem) {
+//         var oCells = oItem.getCells();
+//         oCells.forEach(function(oCell){
+//             pdfContent += oCell.getText() + "\t";
+//         });
+//         pdfContent += "\n";
+//     });
+//     var pdfDocGenerator = pdfMake.createPdf(pdfContent);
+//     pdfDocGenerator.download("table.pdf");
+//     sap.m.MessageToast.show("File Downloaded Successfully!");
+// // }
+// <!---------------- another way for sorting the column in the pdf document (manual sorting)  -------------------------!>
+//  Get all items and their binding contexts
+//  var aItems = [];
+//  oItems.forEach(function(oItem) {
+//      aItems.push({
+//          context: oItem.getBindingContext(),
+//          cells: oItem.getCells()
+//      });
+//  });
+ 
+//  Sort items by role (assuming role is in the 3rd column - adjust index as needed)
+//  aItems.sort(function(a, b) {
+//      var roleA = a.cells[2].getText().toLowerCase(); // Change index to your role column
+//      var roleB = b.cells[2].getText().toLowerCase();
+//      return roleA.localeCompare(roleB);
+     
+//       For descending order:
+//       return roleB.localeCompare(roleA);
+//  });
