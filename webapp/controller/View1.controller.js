@@ -27,6 +27,8 @@ sap.ui.define([
             jQueryScript2.setAttribute('src','https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js');
             document.head.appendChild(jQueryScript2);
 
+            jQuery.sap.includeScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js", "jsPDF");
+            jQuery.sap.includeScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js", "jsPDFAutoTable");
             // that.getView().setModel(new sap.ui.model.json.JSONModel({
             //     currentDate : new Date()
             // }))
@@ -293,65 +295,7 @@ sap.ui.define([
                 }
             })
         },
-   
-        // pdfDownload: function() {
-        //     var oTable = this.getView().byId("empExpTable");
-        //     var oColumns = oTable.getColumns();
-        //     var oItems = oTable.getItems();
-        //     var tableBody = [];
-        //     var headerRow = [];
-        //     var columnWidths = ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'];
-            
-        //     oColumns.forEach(function(oColumn) {
-        //         headerRow.push({ text: oColumn.getHeader().getText(), style: 'tableHeader' });
-        //     });
-        //     tableBody.push(headerRow);
-            
-        //     oItems.forEach(function(oItem) {
-
-        //         var dataRow = [];
-        //         var oCells = oItem.getCells();
-        //         oCells.forEach(function(oCell) {
-        //             dataRow.push({ text: oCell.getText(), style: 'tableContent' });
-        //         });
-        //         tableBody.push(dataRow);
-        //     });
-            
-        //     var docDefinition = {
-        //         content: [
-        //             { text: 'Employee Experience Report', style: 'header' },
-        //             { text: '\n' }, 
-        //             {
-        //                 table: {
-        //                     headerRows: 1,
-        //                     // widths: Array(oColumns.length).fill('*'),
-        //                     widths: columnWidths,
-        //                     body: tableBody
-        //                 },
-        //             }
-        //         ],
-        //         styles: {
-        //             header: {
-        //                 fontSize: 14,
-        //                 bold: true,
-        //                 alignment: 'center',
-        //                 margin: [0, 0, 0, 10]
-        //             },
-        //             tableHeader: {
-        //                 bold: true,
-        //                 fontSize: 9,
-        //                 color: 'black'
-        //             },
-        //             tableContent: {
-        //                 fontSize: 8 
-        //             }
-        //         },
-        //         pageSize: 'A4',
-        //         pageOrientation: 'potrait'
-        //     };
-        //     pdfMake.createPdf(docDefinition).download('Employee_Experience.pdf');
-        //     sap.m.MessageToast.show("PDF Downloaded Successfully!");
-        // }
+// <!------------------- pdf download (sorting based on designation) ------------------------->
         pdfDownload: function() {
             var oTable = this.getView().byId("empExpTable");
             var oColumns = oTable.getColumns();
@@ -421,6 +365,96 @@ sap.ui.define([
         }
     });
 });
+// pdfDownload: function() {
+//     var oTable = this.getView().byId("empExpTable");
+//     var oColumns = oTable.getColumns();
+//     var oItems = oTable.getItems();
+//     var tableBody = [];
+//     var headerRow = [];
+//     var columnWidths = ['auto', 'auto', 'auto', 'auto', 'auto', 'auto'];
+    
+//     oColumns.forEach(function(oColumn) {
+//         headerRow.push({ text: oColumn.getHeader().getText(), style: 'tableHeader' });
+//     });
+//     tableBody.push(headerRow);
+    
+//     oItems.forEach(function(oItem) {
+
+//         var dataRow = [];
+//         var oCells = oItem.getCells();
+//         oCells.forEach(function(oCell) {
+//             dataRow.push({ text: oCell.getText(), style: 'tableContent' });
+//         });
+//         tableBody.push(dataRow);
+//     });
+    
+//     var docDefinition = {
+//         content: [
+//             { text: 'Employee Experience Report', style: 'header' },
+//             { text: '\n' }, 
+//             {
+//                 table: {
+//                     headerRows: 1,
+//                     // widths: Array(oColumns.length).fill('*'),
+//                     widths: columnWidths,
+//                     body: tableBody
+//                 },
+//             }
+//         ],
+//         styles: {
+//             header: {
+//                 fontSize: 14,
+//                 bold: true,
+//                 alignment: 'center',
+//                 margin: [0, 0, 0, 10]
+//             },
+//             tableHeader: {
+//                 bold: true,
+//                 fontSize: 9,
+//                 color: 'black'
+//             },
+//             tableContent: {
+//                 fontSize: 8 
+//             }
+//         },
+//         pageSize: 'A4',
+//         pageOrientation: 'potrait'
+//     };
+//     pdfMake.createPdf(docDefinition).download('Employee_Experience.pdf');
+//     sap.m.MessageToast.show("PDF Downloaded Successfully!");
+// }
+// <!---------------------------------- pdf download using autoTable ---------------------------------->
+//         pdfDownload: function(){
+//             var oTable = that.getView().byId("empExpTable");
+//             var tableItems = oTable.getItems();
+//             var headers = [
+//                 ["EmployeeID_EMP_ID","CompanyName","Role","StartDate","EndDate","Responsibilities"]
+//             ];
+//             tableItems.forEach(function(oItem){
+//                 var oBinding = oItem.getBindingContext();
+//                 if(oBinding){
+//                     headers.push([
+//                         oBinding.getProperty("EmployeeID_EMP_ID"),
+//                         oBinding.getProperty("CompanyName"),
+//                         oBinding.getProperty("Role"),
+//                         oBinding.getProperty("StartDate"),
+//                         oBinding.getProperty("EndDate"),
+//                         oBinding.getProperty("Responsibilities")
+//                     ])
+//                 }
+//             })
+//             var { jsPDF } = window.jspdf;
+//             var document = new jsPDF();
+//             document.text("Employee Experience",14,20);
+//             document.autoTable({
+//                 startY: 30, 
+//                 head: [headers[0]],
+//                 body: headers.slice(1),
+//                 theme: 'plain',  
+//             });
+//             document.save("Experience Info");
+//         }
+//     
 // <!---------------- layout for the table in the pdf -----------------!>
 // layout: {
 //     hLineWidth: function(i, node) { return 0.5; },
